@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @memo.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @memo.note %>
+</p>
+
+<p>
+  <b>Flag:</b>
+  <%= @memo.flag %>
+</p>
+
+
+<%= link_to 'Edit', edit_memo_path(@memo) %> |
+<%= link_to 'Back', memos_path %>
