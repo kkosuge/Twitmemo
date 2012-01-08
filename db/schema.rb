@@ -11,12 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120107232419) do
+ActiveRecord::Schema.define(:version => 20120108002853) do
 
   create_table "memos", :force => true do |t|
     t.string   "name"
     t.text     "note"
     t.integer  "flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.integer  "twitter_id"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "img"
+    t.string   "token"
+    t.string   "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

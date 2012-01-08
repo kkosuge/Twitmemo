@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<% if current_user -%>
+  ようこそ、<%= current_user.nickname %>さん。 | <%= link_to 'logout', logout_path %><br>
+  <%= current_user.name %><br>
+  <%= current_user.img %><br>
+  <%= current_user.token %><br>
+  <%= current_user.secret %><br>
+  <%= current_user.twitter_id %><br>
+
+
+<% else -%>
+  <%= link_to 'Twitterでログイン', 'auth/twitter' %>
+<% end -%>
+
+
 <%= yield %>
 
 </body>
