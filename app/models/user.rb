@@ -10,10 +10,9 @@ class User < ActiveRecord::Base
     user.save!
   end
 end
+
 # == Schema Information
-#
-# Table name: users
-#
+#  Table name : users
 #  id         :integer         not null, primary key
 #  twitter_id :integer
 #  name       :string(255)
@@ -23,5 +22,3 @@ end
 #  secret     :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#
-

@@ -1,27 +1,34 @@
-<h1>Listing memos</h1>
+<div class="row">
+  <div class="span14">
+    <h2>Your Memos</h2>
+    <div class="well">
+      <% @memos.each do |memo| %>
+        <div style='float:left; margin-top:-10px; margin-bottom: 5px;'>
+          <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+        </div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Note</th>
-    <th>Flag</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+        <div style='float:left; margin-left:1em; margin-top:-13px;'>
+          <h4 style="margin-bottom:-7px"><a target='_blank' href='https://twitter.com/<%= memo.name %>'><%= memo.name %></a></h4>
+          <span class="label">0 memo</span>
+        </div>
 
-<% @memos.each do |memo| %>
-  <tr>
-    <td><%= memo.name %></td>
-    <td><%= memo.note %></td>
-    <td><%= memo.flag %></td>
-    <td><%= link_to 'Show', memo %></td>
-    <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
-    <td><%= link_to 'Destroy', memo, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+        <table class="bordered-table">
+          <td><%= memo.note %></td>
+        </table>
 
-<br />
+        <div align="right" style='margin-top:-7px;'>
+          <% if memo.flag == 1 -%>
+            <span class="label warning">Public</span>
+          <% else -%>
+            <span class="label notice">Private</span>
+          <% end %>
+          <%= link_to 'Edit', edit_memo_path(memo), class:"btn small default" %>
+          <%= link_to 'Destroy', memo, confirm: 'Are you sure?', method: :delete, class:"btn small danger" %>
+          <div class="page-header"></div>
+        </div>
+      <% end %>
 
-<%= link_to 'New Memo', new_memo_path %>
+    </div>
+      <%= paginate @memos %>
+  </div>
+</div>

@@ -1,8 +1,7 @@
 class MemosController < ApplicationController
   # GET /memos
-  # GET /memos.json
   def index
-    @memos = Memo.all
+    @memos = Memo.order("updated_at DESC").page(params[:page]).per(5)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +21,6 @@ class MemosController < ApplicationController
   end
 
   # GET /memos/new
-  # GET /memos/new.json
   def new
     @memo = Memo.new
 
@@ -32,23 +30,34 @@ class MemosController < ApplicationController
     end
   end
 
-  # GET /memos/1/edit
-  def edit
-    @memo = Memo.find(params[:id])
+  def create_twitter_user(hash)
+    user = twitter_client.user(hash[:screen_name])
+    @twitter = TwitterUser.new(twitter_id:user.id , screen_name: hash[:screen_name], img_url: user.profile_image_url)
+    @twitter.save!
+    return @twitter
   end
 
-  # POST /memos
-  # POST /memos.json
+  # POST /api/post.json
   def create
-    @memo = Memo.new(params[:memo])
+    return redirect_to '/404.html' unless request.xhr?
+    @twitter = TwitterUser.find_by_screen_name(params[:name]) || create_twitter_user(screen_name: params[:name])
+    @memo = Memo.where(twitter_user_id: @twitter.id, author: session[:twitter_id]).first
+    
+    # same name
+    if @memo
+      @memo.note = params[:note]
+      @memo.flag = params[:flag]
+    else
+      @memo = Memo.new(name: @twitter.screen_name, note: params[:note], twitter_user_id: @twitter.id, flag: params[:flag], author: session[:twitter_id])
+    end
 
     respond_to do |format|
       if @memo.save
         format.html { redirect_to @memo, notice: 'Memo was successfully created.' }
-        format.json { render json: @memo, status: :created, location: @memo }
+        format.json { render json: @memo, status: :created, location: @memo}
       else
         format.html { render action: "new" }
-        format.json { render json: @memo.errors, status: :unprocessable_entity }
+        format.json { render json: @memo.errors, status: :unprocessable_entity}
       end
     end
   end
