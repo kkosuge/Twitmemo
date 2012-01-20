@@ -12,15 +12,19 @@
        </div>
 
     <h2>Memo</h2>
-		<div class="well">
-			<div style='margin-left:1em; margin-top:-13px;'>
-				<h4 style="margin-bottom:-7px">id: <%= @users.id %></a></h4>
-				<h4>twitter_id: <%= @users.twitter_id %></a></h4>
-				<h4>nickname: <%= @users.nickname %></a></h4>
- 				<h4>name: <%= @users.name %></a></h4>
- 				<img src=<%= @users.img %>>
-			</div>
-		</div>
-
-	</div>
-</div>
+      <div class="well">
+        <% if @twitter.memos.present? -%>
+          <% @twitter.memos.each do |note| %>
+			   <div style='margin-left:1em; margin-top:-13px;'>
+				  <h4 style="margin-bottom:-7px">id: <%= note.id %></a></h4>
+				  <h4>twitter_id: <%= note.name %></a></h4>
+				  <h4>nickname: <%= note.note %></a></h4>
+ 				  <h4>name: <%= note.flag %></a></h4>
+            </div>
+          <% end %>
+      <% else -%>
+        <h4>No memos</h4>
+      <% end -%>
+		  </div>
+	 </div>
+  </div>

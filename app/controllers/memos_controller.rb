@@ -1,7 +1,7 @@
 class MemosController < ApplicationController
   # GET /memos
   def index
-    @memos = Memo.order("updated_at DESC").page(params[:page]).per(5)
+    @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(5)
 
     respond_to do |format|
       format.html # index.html.erb
