@@ -3,8 +3,7 @@
     var screen_name = location.href.slice(27);
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
     $.getJSON(api_url, function(json,status){
-          alert(api_url);
-          $("body").css("background", "url("+ json.profile_background_image_url + ")");
+      $("body").css("background", "url("+ json.profile_background_image_url + ")");
     });
   });
 </script>
@@ -24,7 +23,7 @@
 
     <h2>Memo</h2>
       <div class="well">
-        <% if @memos -%>
+        <% if @memos.present? -%>
           <% @memos.each do |note| %>
 			   <div style='margin-left:1em; margin-top:-13px;'>
 				  <h4 style="margin-bottom:-7px">id: <%= note.id %></a></h4>
@@ -34,7 +33,7 @@
             </div>
           <% end %>
       <% else -%>
-        <h4>No memos</h4>
+        <h4>まだこのユーザーに関するメモがありません｡</h4>
       <% end -%>
 		  </div>
 	 </div>

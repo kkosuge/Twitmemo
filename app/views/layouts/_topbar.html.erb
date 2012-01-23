@@ -1,6 +1,7 @@
 <div class="fill">
   <div class="container">
-		<h3><%= link_to 'Twitmemo',root_path %></h3>
+    <h3><%= link_to 'Twitmemo',root_path %></h3>
+    <% if current_user -%>
       <ul class="nav">
         <li><a href="/">Home</a></li>
         <li><a href="note">Following</a></li>
@@ -8,7 +9,6 @@
         <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
        </ul>
 
-      <% if current_user -%>
         <ul class="nav secondary-nav">
           <li data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><%= link_to 'Memo' %></li>
           <li><%= link_to 'Logout', logout_path %></li>

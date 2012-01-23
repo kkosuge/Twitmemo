@@ -2,7 +2,6 @@
 class SessionsController < ApplicationController
   def login
     auth = request.env['omniauth.auth']
-
     if user = User.find_by_nickname(auth['user_info']['nickname'])
       user.img = auth['user_info']['image']
       user.nickname = auth['user_info']['nickname']
@@ -12,7 +11,7 @@ class SessionsController < ApplicationController
 
       User.update_twitter_user(auth)
     else 
-      user = User.create_account(auth)
+      User.create_account(auth)
     end
 
     session[:user_id] = user.id
@@ -26,5 +25,4 @@ class SessionsController < ApplicationController
     session[:twitter_id] = nil
     redirect_to root_url, :notice => 'ログアウトしました。'
   end
-
 end
