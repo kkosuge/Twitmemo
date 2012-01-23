@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
       User.update_twitter_user(auth)
     else 
-      User.create_account(auth)
+      user = User.create_account(auth)
     end
 
     session[:user_id] = user.id
@@ -27,7 +27,4 @@ class SessionsController < ApplicationController
     redirect_to root_url, :notice => 'ログアウトしました。'
   end
 
-  def failure
-    redirect_to root_url
-  end
 end
