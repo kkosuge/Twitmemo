@@ -8,14 +8,10 @@
     </div>
 
     <ul>
-      <li><a href="/">Home</a></li>
+      <li data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="/">New memo</a></li>
       <li><a href="note">Following</a></li>
-      <li><a href="user">User</a></li>
+      <li><a href="user/<%= nickname %>">User</a></li>
       <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
     </ul>
-
-    <%= form_tag(root_path, :method => :get) do %>
-		<%= search_field_tag :keyword ,nil,:placeholder => "keyword"%>
-    <% end -%>
   </div>
 </div>

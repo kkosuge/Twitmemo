@@ -8,7 +8,7 @@ Twitmemo::Application.routes.draw do
   # rooting
   match '/note' => 'note#index'
   match '/memos' => 'memos#index'
-  match '/user(/:screen_name)' => 'user#index'
+  match '/user/:screen_name' => 'user#index'
   # api
   match '/api/post' => 'memos#create'
   match '/api/following/:id' => 'following#index'

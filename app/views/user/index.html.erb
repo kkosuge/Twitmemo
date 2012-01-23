@@ -4,6 +4,12 @@
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
     $.getJSON(api_url, function(json,status){
       $("body").css("background", "url("+ json.profile_background_image_url + ")");
+      $("#prof_info").append(
+        "<img src="+ json.profile_image_url +">" +
+        "<h4>"+ json.screen_name +"</h4>" +
+        "<h4>"+ json.name +"</h4>" +
+        "<h4>"+ json.description +"</h4>"
+      );
     });
   });
 </script>
@@ -12,13 +18,7 @@
 	<div class="span9">
 		<h2>Profile</h2>
 		<div class="well">
-			<div style='margin-left:1em; margin-top:-13px;'>
-				<h4 style="margin-bottom:-7px">id: <%= @users.id %></a></h4>
-				<h4>twitter_id: <%= @users.twitter_id %></a></h4>
-				<h4>nickname: <%= @users.nickname %></a></h4>
- 				<h4>name: <%= @users.name %></a></h4>
- 				<img src=<%= @users.img %>>
-			</div>
+			<div id="prof_info" style='margin-left:1em; margin-top:-13px;'></div>
        </div>
 
     <h2>Memo</h2>
