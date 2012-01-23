@@ -1,5 +1,5 @@
 <div class="row">		  
-	<div class="span14">
+	<div class="span9">
 		<h2>Profile</h2>
 		<div class="well">
 			<div style='margin-left:1em; margin-top:-13px;'>
@@ -13,8 +13,8 @@
 
     <h2>Memo</h2>
       <div class="well">
-        <% if @twitter.memos.present? -%>
-          <% @twitter.memos.each do |note| %>
+        <% if @memos -%>
+          <% @memos.each do |note| %>
 			   <div style='margin-left:1em; margin-top:-13px;'>
 				  <h4 style="margin-bottom:-7px">id: <%= note.id %></a></h4>
 				  <h4>twitter_id: <%= note.name %></a></h4>
@@ -27,4 +27,3 @@
       <% end -%>
 		  </div>
 	 </div>
-  </div>

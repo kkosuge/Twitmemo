@@ -4,4 +4,8 @@ class Memo < ActiveRecord::Base
   validates :note,    :presence => true
 
   validates :flag,    :presence => true
+
+  scope :keyword_search, lambda { |keyword|
+    where 'note like :q or name like :q', :q => "%#{keyword}%"
+  }
 end

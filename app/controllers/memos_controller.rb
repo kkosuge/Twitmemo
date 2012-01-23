@@ -1,7 +1,11 @@
 class MemosController < ApplicationController
   # GET /memos
   def index
-    @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(5)
+    if params[:keyword].present?
+      @memos = Memo.keyword_search(params[:keyword]).page(params[:page])
+    else
+      @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(5)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,22 +14,11 @@ class MemosController < ApplicationController
   end
 
   # GET /memos/1
-  # GET /memos/1.json
   def show
     @memo = Memo.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @memo }
-    end
-  end
-
-  # GET /memos/new
-  def new
-    @memo = Memo.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @memo }
     end
   end
@@ -43,7 +36,6 @@ class MemosController < ApplicationController
     @twitter = TwitterUser.find_by_screen_name(params[:name]) || create_twitter_user(screen_name: params[:name])
     @memo = Memo.where(twitter_user_id: @twitter.id, author: session[:twitter_id]).first
     
-    # same name
     if @memo
       @memo.note = params[:note]
       @memo.flag = params[:flag]

@@ -1,25 +1,21 @@
 <div class="fill">
   <div class="container">
-		<h3><%= link_to "Twitmemo", root_path %></h3>
+		<h3><%= link_to 'Twitmemo',root_path %></h3>
       <ul class="nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="memos">Memo</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="note">Following</a></li>
+        <li><a href="user">User</a></li>
         <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
-      	<li><a href="user">User</a></li>
        </ul>
 
-       <form accept-charset="UTF-8" action="" method="get">
-         <div style="margin:0;padding:0;display:inline">
-           <input name="utf8" type="hidden" value="search" />
-         </div>
-        <input id="keyword" name="keyword" placeholder="keyword" type="search" />
-      </form> 
 
       <% if current_user -%>
-        <p class="pull-right"><%= link_to 'Logout', logout_path ,class:"btn primary" %></p>
-        <p class="pull-right" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true" style="margin-right:0.5em"><%= link_to 'Memo', new_memo_path ,class:"btn primary" %></p>
+        <ul class="nav secondary-nav">
+          <li data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><%= link_to 'Memo' %></li>
+          <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
       <% else -%>
 			<p class="pull-right"><%= link_to 'Login with Twitter', 'auth/twitter' ,class:"btn primary" %></p>
       <% end -%>
   </div>
-</div> <!-- /fill -->
+</div>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span14">
+  <div class="span9">
     <h2>Your Memos</h2>
     <div class="well">
       <% @memos.each do |memo| %>
@@ -26,9 +26,7 @@
           <%= link_to 'Destroy', memo, confirm: 'Are you sure?', method: :delete, class:"btn small danger" %>
           <div class="page-header"></div>
         </div>
-      <% end %>
-
+       <% end %>
     </div>
-      <%= paginate @memos %>
+    <%= paginate @memos %>
   </div>
-</div>

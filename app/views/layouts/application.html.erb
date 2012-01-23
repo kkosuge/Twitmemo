@@ -20,30 +20,43 @@
         width: 820px;
       }
     </style>
-</head>
+  </head>
   <body>
     <%= render 'layouts/popup' %>
     <%= render 'layouts/about' %>
   <div class = "topbar"> 
     <%= render 'layouts/topbar' %>
-  </div>
-  <!--topbar-->
+  </div> <!--topbar-->
 
   <div class="container">
     <div class="content">
-
         <div class="page-header">
           <% if current_user -%>
-            <h1><img src='<%= current_user.img %>'><%= current_user.name %><small> <%= @memos.count %>memo</small></h1>
-          <% else -%>
-            <h1>Not loged in</h1>
-          <% end -%>
+            <h1><img src='<%= current_user.img %>'> <%= current_user.name %><small> <%= memoed_count %>メモした <%= memo_count %>メモされた</small></h1>
+          <%= "<small>Search Keyword: #{params[:keyword]}</small>".html_safe if params[:keyword].present? %>
         </div>
-
         <%= yield %>
-      </div>
 
+        <div class="span5">
+          <h2>Menu</h2>
+          <div class="well">
+            <%= form_tag(root_path, :method => :get) do %>
+              <%= search_field_tag :keyword ,nil,:placeholder => "keyword"%>
+            <% end -%>
+            <ul>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+            </ul>
+          </div>
+        </div>
+        <% else -%>
+          <%= render 'layouts/index' %>
+        <% end -%>
+      </div>
       <footer><p>&copy; Company 2011</p></footer>
-    </div> <!-- /container -->
+    </div>
   </body>
 </html>

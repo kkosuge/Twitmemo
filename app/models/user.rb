@@ -8,17 +8,12 @@ class User < ActiveRecord::Base
     user.secret = auth['credentials']['secret']
     user.twitter_id = auth["uid"]
     user.save!
+
+    twitteruser = TwitterUser.new
+    twitteruser.twitter_id = auth["uid"]
+    twitteruser.screen_name = auth['user_info']['nickname']
+    twitteruser.img_url = auth['user_info']['image']
+    twitteruser.save!
+    user
   end
 end
-
-# == Schema Information
-#  Table name : users
-#  id         :integer         not null, primary key
-#  twitter_id :integer
-#  name       :string(255)
-#  nickname   :string(255)
-#  img        :string(255)
-#  token      :string(255)
-#  secret     :string(255)
-#  created_at :datetime
-#  updated_at :datetime
