@@ -22,7 +22,6 @@ class FollowingController < ApplicationController
     end
 
     users = twitter.users(userfriends)
-    pp users
     twitter_users = TwitterUser.where("twitter_id in (?)", userfriends)
     userinfo = []
     twitter_users.each{|user| userinfo << user.id}
