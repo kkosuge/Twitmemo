@@ -9,7 +9,11 @@
 
         <div style='float:left; margin-left:1em; margin-top:-13px;'>
           <h4 style="margin-bottom:-7px"><a target='_blank' href='https://twitter.com/<%= memo.name %>'><%= memo.name %></a></h4>
-          <span class="label">0 memo</span>
+          <% if memo.flag == 1 -%>
+            <span class="label warning">Public</span>
+          <% else -%>
+            <span class="label notice">Private</span>
+          <% end %>
         </div>
 
         <table class="bordered-table">
@@ -17,11 +21,6 @@
         </table>
 
         <div align="right" style='margin-top:-7px;'>
-          <% if memo.flag == 1 -%>
-            <span class="label warning">Public</span>
-          <% else -%>
-            <span class="label notice">Private</span>
-          <% end %>
           <%= link_to 'Edit', edit_memo_path(memo), class:"btn small default" %>
           <%= link_to 'Destroy', memo, confirm: 'Are you sure?', method: :delete, class:"btn small danger" %>
           <div class="page-header"></div>

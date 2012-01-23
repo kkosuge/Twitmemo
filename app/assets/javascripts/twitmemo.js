@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $(".newmemo").click(function(){
     setTimeout(function(){
       var name = $(this).parent().parent().parent().find('.screen_name').text().slice(1);
@@ -52,4 +53,5 @@ $(document).ready(function(){
 		}, 500);
 	 return false;
 	});
+
 });
