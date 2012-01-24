@@ -1,17 +1,5 @@
 $(document).ready(function(){
   /*
-  * edit assist
-  */
-  $(".newmemo").click(function(){
-    setTimeout(function(){
-      var name = $(this).parent().parent().parent().find('.screen_name').text().slice(1);
-      var img = $(this).parent().parent().parent().find('img').attr('src');
-      $("input#input_screen_name").val(name);
-      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
-    }, 5000);
-  });
-
-  /*
   * post
   */
   $("#send").click(function(){
@@ -28,6 +16,7 @@ $(document).ready(function(){
           location.reload();
         },
         error: function(){
+          $('#my-modal').modal(false);
           alert("failed!");
         }
     	});
@@ -45,7 +34,7 @@ $(document).ready(function(){
       $.getJSON(api_url, function(json,status){
       $("#twitter_icon").html($("<img/>",{ src: json.profile_image_url , class:"service-profile-icon", style: "width:4em;height:4em;" }));
       });
-    },100);
+    },50);
   });
 
   /*
@@ -58,10 +47,37 @@ $(document).ready(function(){
   });
 
   /*
+  * edit
+  */
+  $(".editmemo").click(function(){
+    setTimeout(function(){
+      document.getElementById("input_note_area").focus();
+    }, 0);
+    var name = $(this).attr("data-name");
+    var note = $(this).attr("data-note");
+    var img = $(this).attr("data-img");
+    $("input#input_screen_name").val(name);
+    $("#input_note_area").val(note);
+    $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
+  });
+
+  /*
   * close modal
   */
   $("#modal_close").click(function(){
       $('#modal-from-dom').modal(false);
+      $("input#input_screen_name").val("");
+      return false;
+  });
+
+  /*
+  * close modal
+  */
+  $(".close").click(function(){
+      $('#my-modal').modal(false);
+      $("input#input_screen_name").val("");
+      $("#twitter_icon").empty();
+      $("#input_note_area").val("");
       return false;
   });
 

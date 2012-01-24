@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #before_filter :twitter_client
 
   def twitter_client
     user = User.find(session[:user_id]) if session[:user_id]

@@ -1,5 +1,7 @@
 class Memo < ActiveRecord::Base
   belongs_to :twitter_user
+
+  validates :name,    :presence => true
   
   validates :note,    :presence => true
 

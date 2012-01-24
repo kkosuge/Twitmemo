@@ -4,7 +4,7 @@ class MemosController < ApplicationController
     if params[:keyword].present?
       @memos = Memo.keyword_search(params[:keyword]).page(params[:page])
     else
-      @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(5)
+      @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(10)
     end
 
     respond_to do |format|

@@ -8,10 +8,11 @@
     </div>
 
     <ul>
-      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">New memo</a></li>
-      <li><a href="note">Following</a></li>
-      <li><a href="user/<%= nickname %>">User</a></li>
-      <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
+      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">新規メモ</a></li>
+      <li><%= link_to "自分のメモ", memos_path %></li>
+      <li><%= link_to "最近のフォロー", note_path %></li>
+      <li><%= link_to "ユーザー情報", user_path(screen_name: nickname) %></li>
+      <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">Twitmemoについて</a></li>
     </ul>
   </div>
 </div>
