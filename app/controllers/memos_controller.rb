@@ -13,15 +13,11 @@ class MemosController < ApplicationController
     end
   end
 
-  # GET /memos/1
-  def show
-    @memo = Memo.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @memo }
-    end
-  end
+  # GET /api/memos/:screen_name
+  def search
+    @memo = Memo.where(name: params[:screen_name])
+    render json: @memo
+   end
 
   def create_twitter_user(hash)
     user = twitter_client.user(hash[:screen_name])
@@ -50,22 +46,6 @@ class MemosController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @memo.errors, status: :unprocessable_entity}
-      end
-    end
-  end
-
-  # PUT /memos/1
-  # PUT /memos/1.json
-  def update
-    @memo = Memo.find(params[:id])
-
-    respond_to do |format|
-      if @memo.update_attributes(params[:memo])
-        format.html { redirect_to @memo, notice: 'Memo was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @memo.errors, status: :unprocessable_entity }
       end
     end
   end

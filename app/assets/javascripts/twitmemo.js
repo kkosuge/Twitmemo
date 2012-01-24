@@ -41,13 +41,23 @@ $(document).ready(function(){
   */
   $('#my-modal').modal(true);
   $("#input_screen_name").bind("textchange", function(){
-    clearTimeout(timeout);
-    var timeout = setTimeout(function() {
+ 
+    var getimg = setTimeout(function() {
       var api_url = "https://api.twitter.com/1/users/show.json?screen_name="+$("#input_screen_name").val()+"&callback=?";
       $.getJSON(api_url, function(json,status){
       $("#twitter_icon").html($("<img/>",{ src: json.profile_image_url , class:"service-profile-icon", style: "width:4em;height:4em;" }));
       });
-    },500);
+    },1000);
+
+    var getmemo = setTimeout(function() {
+      var memo_url = "api/memos/"+$("#input_screen_name").val();
+      $.getJSON(memo_url, function(data){
+        for(var i in data) {
+          $("#input_note_area").val(data[i].note);
+        }
+      });
+    },1000);
+
   });
   /*
   * auto focus

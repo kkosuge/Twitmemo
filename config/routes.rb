@@ -13,4 +13,5 @@ Twitmemo::Application.routes.draw do
   match '/api/post' => 'memos#create'
   match '/api/following/:id' => 'following#index'
   match '/api/memos' => 'memos#index'
+  match '/api/memos/:screen_name' => 'memos#search'
 end
