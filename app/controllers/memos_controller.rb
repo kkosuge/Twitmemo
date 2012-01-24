@@ -77,7 +77,7 @@ class MemosController < ApplicationController
     @memo.destroy
 
     respond_to do |format|
-      format.html { redirect_to memos_url }
+      format.html { redirect_to memos_path }
       format.json { head :ok }
     end
   end

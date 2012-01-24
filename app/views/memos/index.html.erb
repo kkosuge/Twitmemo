@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span9">
     <h2>Your Memos</h2>
-    <div class="well">
+    <div class="well memo_area">
       <% @memos.each do |memo| %>
         <div style='float:left; margin-top:-10px; margin-bottom: 5px;'>
           <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
