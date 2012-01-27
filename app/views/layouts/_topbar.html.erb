@@ -5,10 +5,10 @@
       <%= form_tag(root_path, :method => :get) do %>
         <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索"%>
       <% end -%>
-      <p class="pull-right"><%= link_to 'Logout', logout_path, class:"btn primary" %></p>
-      <p class="pull-right" style="color:#fff; margin-right:10<D-r>em;"><%= "検索結果 : #{params[:keyword]}".html_safe if params[:keyword].present? %></p>
+      <p class="pull-right"><a href=""><%= link_to 'Sign out', logout_path, %></a></p>
+      <p class="pull-right" style="color:#fff; margin-right:10em;"><%= "検索結果 : #{params[:keyword]}".html_safe if params[:keyword].present? %></p>
     <% else -%>
-		<p class="pull-right"><%= link_to 'Login with Twitter', 'auth/twitter' ,class:"btn primary" %></p>
+      <p class="pull-right"><a href=""><%= link_to 'Sign in', 'auth/twitter' %></a><p>
     <% end -%>
   </div>
 </div>

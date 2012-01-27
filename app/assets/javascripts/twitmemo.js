@@ -13,7 +13,14 @@ $(document).ready(function(){
   $("#send").click(function(){
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
-    var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
+    var flag = 1; if ($('#private').is(':checked') == false) { flag = 0; }
+    var label;
+    if (flag==0){
+      label = "<span class='label warning status'>Public</span>"
+    } else {
+      label = "<span class='label notice status'>Private</span>"
+    }
+
     $.getJSON("https://api.twitter.com/1/users/show.json?screen_name="+ name +"&callback=?", function(json,status){
       $.ajax({
         type: "POST",
@@ -36,7 +43,7 @@ $(document).ready(function(){
                 "<a target='_blank' href='https://twitter.com/" + name +"'><img height='48px' width='48px' src='http://img.tweetimag.es/i/"+ name +"'></a>" +
               "</div>"+
               "<div style='float:left; margin-left:1em; margin-top:-10px;'>"+
-              "<h4 id='screen_name'><a href='/user/" + name + "'>"+ name +"</a> <span class='label warning status'>Public</span>"+
+              "<h4 id='screen_name'><a href='/user/" + name + "'>"+ name +"</a> "+ label +
               "</h4>"+
               "<p>"+note+"</p>"+
               "</div>"+
@@ -73,7 +80,7 @@ $(document).ready(function(){
       $.getJSON(api_url, function(json,status){
       $("#twitter_icon").html($("<img/>",{ src: json.profile_image_url , class:"service-profile-icon", style: "width:4em;height:4em;" }));
       });
-    },1000);
+    },1500);
 
     var getmemo = setTimeout(function() {
       var memo_url = "api/memos/"+$("#input_screen_name").val();

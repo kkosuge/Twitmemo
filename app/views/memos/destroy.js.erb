@@ -1,1 +1,5 @@
-$(".<%= @screen_name %>").hide();
+$(".<%= @screen_name %>").remove();
+$.meow({
+  message: "Delete!"
+});
+
