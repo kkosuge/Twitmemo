@@ -1,26 +1,23 @@
 $(document).ready(function(){
-  /*
-   * stickyscroll
-   */ 
+  /* stickyscroll */
   $('.sidebar').containedStickyScroll({
     duration: 200,
     closeChar: 'x',
     closeRight: 10
   } );
-  /*
-  * post
-  */
+
+  /* post */
   $("#send").click(function(){
+    $(this).button('loading');
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
-    var flag = 1; if ($('#private').is(':checked') == false) { flag = 0; }
+    var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
     var label;
-    if (flag==0){
+    if (flag==1){
       label = "<span class='label warning status'>Public</span>"
     } else {
       label = "<span class='label notice status'>Private</span>"
     }
-
     $.getJSON("https://api.twitter.com/1/users/show.json?screen_name="+ name +"&callback=?", function(json,status){
       $.ajax({
         type: "POST",
@@ -30,6 +27,7 @@ $(document).ready(function(){
           $.meow({
             message: "Success!"
           });
+          $("#send").button('reset');
           $("input#input_screen_name").val("");
           $("#twitter_icon").empty();
           $("#input_note_area").val("");
@@ -51,6 +49,7 @@ $(document).ready(function(){
               "<p class='btn small default editmemo editarea' data-note='"+note+"' data-name='"+name+"' data-img='http://img.tweetimag.es/i/"+name+"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/4' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
               "</div>"+
               "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>");
+              edit();
               $(".article").hover(
                 function () {
                   $(this).find(".editarea").css("visibility","visible");
@@ -59,20 +58,18 @@ $(document).ready(function(){
                   $(this).find(".editarea").css("visibility","hidden");
                 }
               );
-
         },
         error: function(){
           $.meow({
             message: "Failed!"
           });
+          $("#send").button('reset');
         }
     	});
     });
   });
 
-  /*
-  * open modal and img show 
-  */
+  /* open modal and img show */
   $('#my-modal').modal(true);
   $("#input_screen_name").bind("textchange", function(){
     var getimg = setTimeout(function() {
@@ -80,7 +77,7 @@ $(document).ready(function(){
       $.getJSON(api_url, function(json,status){
       $("#twitter_icon").html($("<img/>",{ src: json.profile_image_url , class:"service-profile-icon", style: "width:4em;height:4em;" }));
       });
-    },1500);
+    },2000);
 
     var getmemo = setTimeout(function() {
       var memo_url = "api/memos/"+$("#input_screen_name").val();
@@ -92,31 +89,30 @@ $(document).ready(function(){
     },1000);
   });
 
-  /*
-  * auto focus
-  */
+  /* auto focus */
   $("#openmodal").click(function(){
     setTimeout(function(){
       document.getElementById("input_screen_name").focus();
     }, 0);
   });
-  /*
-  * edit
-  */
-  $(".editmemo").click(function(){
-    setTimeout(function(){
-      document.getElementById("input_note_area").focus();
-    }, 0);
-    var name = $(this).attr("data-name");
-    var note = $(this).attr("data-note");
-    var img = $(this).attr("data-img");
-    $("input#input_screen_name").val(name);
-    $("#input_note_area").val(note);
-    $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
-  });
-  /*
-  * close modal
-  */
+
+  /* edit */
+  function edit(){
+    $(".editmemo").click(function(){
+      setTimeout(function(){
+        document.getElementById("input_note_area").focus();
+      }, 0);
+      var name = $(this).attr("data-name");
+      var note = $(this).attr("data-note");
+      var img = $(this).attr("data-img");
+      $("input#input_screen_name").val(name);
+      $("#input_note_area").val(note);
+      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
+    });
+  }
+  edit();
+
+  /* close modal */
   $("#modal_close").click(function(){
       $('#modal-from-dom').modal(false);
       $("input#input_screen_name").val("");
@@ -129,9 +125,8 @@ $(document).ready(function(){
       $("#input_note_area").val("");
       return false;
   });
-  /*
-  * scroll
-  */
+
+  /* scroll */
   $("a[href^=#]").click(function(){
     var Hash = $(this.hash);
 	 var HashOffset = $(Hash).offset().top;
@@ -140,4 +135,5 @@ $(document).ready(function(){
 		}, 500);
 	 return false;
 	});
+
 });

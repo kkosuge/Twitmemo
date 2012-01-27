@@ -6,11 +6,16 @@
     $.getJSON(api_url, function(json,status){
       $("body").css("background", "url("+ json.profile_background_image_url + ")");
       $("#prof_info").append(
-        "<img src="+ json.profile_image_url +">" +
-        "<h4>"+ json.screen_name +"</h4>" +
-        "<h4>"+ json.name +"</h4>" +
-        "<h4>"+ json.description +"</h4>"
-      );
+             "<div style= 'float:left;'>" +
+              "<a target='_blank' href='https://twitter.com/"+ screen_name +"'><img src='"+ json.profile_image_url + "'></a></div>" +
+            "<div style= 'float:left; margin-left:1em;'>" +
+              "<a target='_blank' href='https://twitter.com/"+ screen_name +"'>"+ "<strong class='screen_name'>@" + screen_name + "</a></strong><br/>" +
+              "<strong>" + json.name + "</strong></div>" +
+            "<div align='right'>" +
+              "<span class='label'>Following</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/following'><strong> "+ json.friends_count + "</strong></a>" +
+              "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/followers'><strong> " + json.followers_count + "</strong></a></div>"+
+            "<div style='clear:left;'>" +
+              "<span class='label success'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
     });
   });
 </script>
@@ -18,7 +23,7 @@
 <div class="row">		  
 	<div class="span9">
 		<div class="well">
-			<div id="prof_info" style='margin-left:1em; margin-top:-13px;'></div>
+			<div id="prof_info"></div>
        </div>
 
        <h3>Memo</h3>
