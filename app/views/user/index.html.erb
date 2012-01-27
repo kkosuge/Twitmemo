@@ -1,6 +1,7 @@
 <script type="text/javascript"> 
   $(document).ready(function(){
     $(".headerarea").append("<h2>Profile</h2>");
+    $("body").css("min-height",screen.height);
     var screen_name = location.href.slice(27);
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
     $.getJSON(api_url, function(json,status){
@@ -26,16 +27,24 @@
 			<div id="prof_info"></div>
        </div>
 
-       <h3>Memo</h3>
-              <div class="well">
-       <% if @memos.present? -%>
-              <% @memos.each do |note| %>
-			       <div style='margin-left:1em; margin-top:-13px;'>
-				    <h4 style="margin-bottom:-7px">id: <%= note.id %></a></h4>
-				    <h4>twitter_id: <%= note.name %></a></h4>
-				    <h4>nickname: <%= note.note %></a></h4>
- 				    <h4>name: <%= note.flag %></a></h4>
-                </div>
+       <h3>あなたに関するメモ</h3>
+          <% if @memos.present? -%>
+            <% @memos.each do |memo| %>
+              <div class='<%= memo.name %> article' style="margin-top:20px;">
+                <div style='float:left;'>
+                  <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+              </div>
+
+              <div style='float:left; margin-left:1em; margin-top:-10px;'>
+                <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %></h4>
+                <p><%= memo.note %></p>
+              </div>    
+
+              <div align="right" style='margin-top:-7px;'>
+                <p>メモした人 <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
+              </div>
+
+              <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
           <% end %>
       <% else -%>
         <h4>まだこのユーザーに関するメモがありません｡</h4>

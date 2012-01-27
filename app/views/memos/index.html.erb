@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="span9">
-  <p><%= "Keyword : #{params[:keyword]}".html_safe if params[:keyword].present? %></p>
+  <p><%= "Keyword : #{params[:keyword]}" if params[:keyword].present? %></p>
 
     <div class="memo_area">
     <% if @memos.present? -%> 

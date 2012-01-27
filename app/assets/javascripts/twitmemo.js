@@ -23,7 +23,8 @@ $(document).ready(function(){
         type: "POST",
         url: "api/post.json",
         data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag,
-        success: function(){
+        success: function(res){
+          console.log(res);
           $.meow({
             message: "Success!"
           });
@@ -46,10 +47,10 @@ $(document).ready(function(){
               "<p>"+note+"</p>"+
               "</div>"+
               "<div align='right' style='margin-top:-7px;'>"+
-              "<p class='btn small default editmemo editarea' data-note='"+note+"' data-name='"+name+"' data-img='http://img.tweetimag.es/i/"+name+"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/4' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
+              "<p class='btn small default editmemo editarea' data-note='"+note+"' data-name='"+name+"' data-img='http://img.tweetimag.es/i/"+name+"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/"+res.id+"' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
               "</div>"+
               "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>");
-              edit();
+              edit();   
               $(".article").hover(
                 function () {
                   $(this).find(".editarea").css("visibility","visible");
@@ -86,7 +87,7 @@ $(document).ready(function(){
           $("#input_note_area").val(data[i].note);
         }
       });
-    },1000);
+    },2000);
   });
 
   /* auto focus */
