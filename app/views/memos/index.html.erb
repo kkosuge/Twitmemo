@@ -1,31 +1,47 @@
+<script type="text/javascript"> 
+  $(document).ready(function(){
+    $(".headerarea").append("<h2>My memos</h2>");
+    $(".article").hover(
+      function () {
+      $(this).find(".editarea").css("visibility","visible");
+      },
+      function () {
+        $(this).find(".editarea").css("visibility","hidden");
+      }
+    );
+  }); 
+</script> 
+
 <div class="row">
   <div class="span9">
-    <h2>Your Memos</h2>
-    <div class="well memo_area">
+    <div class="memo_area">
+
       <% @memos.each do |memo| %>
-        <div style='float:left; margin-top:-10px; margin-bottom: 5px;'>
-          <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
-        </div>
+        <div class='<%= memo.name %> article'>
 
-        <div style='float:left; margin-left:1em; margin-top:-13px;'>
-          <h4 id="screen_name" style="margin-bottom:-7px"><a target='_blank' href='https://twitter.com/<%= memo.name %>'><%= memo.name %></a></h4>
-          <% if memo.flag == 1 -%>
-            <span class="label warning">Public</span>
-          <% else -%>
-            <span class="label notice">Private</span>
-          <% end %>
-        </div>
+          <div style='float:left;'>
+            <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+          </div>
 
-        <table class="bordered-table">
-          <td class="note"><%= memo.note %></td>
-        </table>
+          <div style='float:left; margin-left:1em; margin-top:-10px;'>
+            <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %>
+              <% if memo.flag == 1 -%>
+              <span class="label warning status">Public</span>
+            <% else -%>
+              <span class="label notice status">Private</span>
+            <% end %></h4>
+            <p><%= memo.note %></p>
+          </div>    
 
-        <div align="right" style='margin-top:-7px;'>
-          <p class='btn small default editmemo' data-note="<%= memo.note %>" data-name="<%= memo.name %>" data-img="http://img.tweetimag.es/i/<%= memo.name %>" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true">Edit</p>
-          <%= link_to 'Destroy', memo, confirm: 'メモを削除しますか?', method: :delete, class:"btn small danger" %>
-          <div class="page-header"></div>
+          <div align="right" style='margin-top:-7px;'>
+            <p class='btn small default editmemo editarea' data-note="<%= memo.note %>" data-name="<%= memo.name %>" data-img="http://img.tweetimag.es/i/<%= memo.name %>" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true" style="visibility:hidden;">Edit</p>
+            <span class="editarea" style="visibility:hidden;"><%= link_to 'Delete', memo, confirm: 'メモを削除しますか?', method: :delete, remote: true, class:"btn small danger" %></span>
+          </div>
+
+          <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
         </div>
-       <% end %>
+      <% end %>
+
     </div>
     <%= paginate @memos %>
   </div>

@@ -13,11 +13,25 @@
       body {
         padding-top: 40px;
       }
+      .content {
+        -webkit-box-shadow: 0 0px 0px rgba(0,0,0,.0);
+        -moz-box-shadow: 0 0px 0px rgba(0,0,0,.0);
+        box-shadow: 0 0px 0px rgba(0,0,0,.0);
+      }
+      .headerarea, .underline {
+        background-color: #fff;
+      }
       .container > footer p {
         text-align: center;
       }
       .container {
         width: 820px;
+      }
+      h2 {
+        margin: -12px 0px -5px 0px;
+      }
+      h4 {
+        margin: 0px 0px -5px 0px; 
       }
     </style>
   </head>
@@ -32,8 +46,7 @@
   <div class="container">
     <div class="content">
         <% if current_user -%>
-          <div class="page-header">
-            <strong><%= "Search Keyword: #{params[:keyword]}".html_safe if params[:keyword].present? %></strong>
+          <div class="page-header headerarea">
           </div>
           <%= yield %>
           <%= render 'layouts/sidebar' %>
@@ -43,7 +56,7 @@
       </div>
 
       <footer>
-        <p class="pull-right"><a href="#top">Back to top</a></p>
+        <p class="pull-right"><a href="#top">Top</a></p>
         <p>&copy; Twitmemo 2012</p>
       </footer>
     </div>

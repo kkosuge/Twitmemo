@@ -54,11 +54,7 @@ class MemosController < ApplicationController
   # DELETE /memos/1.json
   def destroy
     @memo = Memo.find(params[:id])
+    @screen_name = @memo.name
     @memo.destroy
-
-    respond_to do |format|
-      format.html { redirect_to memos_path }
-      format.json { head :ok }
-    end
   end
 end

@@ -3,11 +3,6 @@ module ApplicationHelper
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def nickname
-    @users = User.find(session[:user_id])
-    @users.nickname
-  end
-
   def memo_count
     @users = User.find(session[:user_id]) 
     @twitter ||= TwitterUser.find_by_screen_name(@users.nickname)

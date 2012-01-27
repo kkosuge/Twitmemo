@@ -3,9 +3,10 @@
     <h3><%= link_to 'Twitmemo',root_path %></h3>
     <% if current_user -%>
       <%= form_tag(root_path, :method => :get) do %>
-        <%= search_field_tag :keyword ,nil,:placeholder => "Search your memos"%>
+        <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索"%>
       <% end -%>
       <p class="pull-right"><%= link_to 'Logout', logout_path, class:"btn primary" %></p>
+      <p class="pull-right" style="color:#fff; margin-right:10<D-r>em;"><%= "検索結果 : #{params[:keyword]}".html_safe if params[:keyword].present? %></p>
     <% else -%>
 		<p class="pull-right"><%= link_to 'Login with Twitter', 'auth/twitter' ,class:"btn primary" %></p>
     <% end -%>

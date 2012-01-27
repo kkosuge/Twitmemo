@@ -1,18 +1,17 @@
-<div class="span5">
-  <h2>Menu</h2>
+<div class="span5 sidebar">
   <div class="well">
     <div class="page-header">
-      <h3><img src='<%= current_user.img %>'> <%= current_user.name %></h3>
+      <h3><img src='<%= current_user.img %>'> <%= link_to current_user.name, user_path(screen_name: current_user.nickname) %></h3>
       <span class="label warning"><%= memoed_count %>memo</span>
       <span class="label warning"><%= memo_count %>memoed</span>
     </div>
 
     <ul>
-      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">新規メモ</a></li>
-      <li><%= link_to "自分のメモ", memos_path %></li>
-      <li><%= link_to "最近のフォロー", note_path %></li>
-      <li><%= link_to "ユーザー情報", user_path(screen_name: nickname) %></li>
-      <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">Twitmemoについて</a></li>
+      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">New</a></li>
+      <li><%= link_to "Memos", memos_path %></li>
+      <li><%= link_to "Following", note_path %></li>
+      <li><%= link_to "Profile", user_path(screen_name: current_user.nickname) %></li>
+      <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
     </ul>
   </div>
 </div>
