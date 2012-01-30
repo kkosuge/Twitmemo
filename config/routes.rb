@@ -6,7 +6,7 @@ Twitmemo::Application.routes.draw do
   match '/logout' => 'sessions#logout', :as => :logout
   match  '/auth/failure' => "memos#index"
   # rooting
-  match '/note' => 'note#index' , :as => :note
+  match '/following' => 'note#index' , :as => :following
   match '/memos' => 'memos#index', :as => :memos
   match '/user/:screen_name' => 'user#index', :as => :user
   # api

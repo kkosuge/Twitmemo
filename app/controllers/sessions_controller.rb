@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
       user.token = auth['credentials']['token']
       user.secret = auth['credentials']['secret']
       user.save!
-
       User.update_twitter_user(auth)
     else 
       User.create_account(auth)

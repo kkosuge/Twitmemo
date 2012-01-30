@@ -1,6 +1,6 @@
 <script type="text/javascript"> 
   $(document).ready(function(){
-    $(".headerarea").append("<h2>Profile</h2>");
+    $(".headerarea").append("<h2>My Page</h2>");
     $("body").css("min-height",screen.height);
     var screen_name = location.href.slice(27);
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";

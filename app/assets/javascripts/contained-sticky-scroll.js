@@ -1,13 +1,5 @@
-/*!
- * Contained Sticky Scroll v1.1
- * http://blog.echoenduring.com/2010/11/15/freebie-contained-sticky-scroll-jquery-plugin/
- *
- * Copyright 2010, Matt Ward
-*/
 (function( $ ){
-
   $.fn.containedStickyScroll = function( options ) {
-  
 	var defaults = {  
 		unstick : true,
 		easing: 'linear',
@@ -16,11 +8,9 @@
 		closeChar: '^',
 		closeTop: 0,
 		closeRight: 0  
-	}  
-                  
+	}                    
 	var options =  $.extend(defaults, options);
-    var $getObject = $(this).selector;
-    
+   var $getObject = $(this).selector; 
 	if(options.unstick == true){  
 		this.css('position','relative');
 		this.append('<a class="scrollFixIt">' + options.closeChar + '</a>');
@@ -46,6 +36,5 @@
             { queue: options.queue, easing: options.easing, duration: options.duration });
         }
 	});
-
   };
 })( jQuery );

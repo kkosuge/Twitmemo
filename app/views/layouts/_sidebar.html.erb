@@ -2,17 +2,16 @@
   <div class="well">
     <div class="page-header">
       <h3><img src='<%= current_user.img %>'> <%= link_to current_user.name, user_path(screen_name: current_user.nickname) %></h3>
-      <span class="label warning"><%= memoed_count %>memo</span>
-      <span class="label warning"><%= memo_count %>memoed</span>
+      <span class="label warning"><%= memoed_count %>メモ</span>
+      <span class="label warning"><%= memo_count %>メモされてる</span>
     </div>
 
     <div id="list">
     <ul>
-      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">New Memo</a></li>
-      <li><%= link_to "My Memos", memos_path %></li>
-      <li><%= link_to "Following", note_path %></li>
-      <li><%= link_to "Profile", user_path(screen_name: current_user.nickname) %></li>
-      <li><a href="" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">About</a></li>
+      <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">新規メモ</a></li>
+      <li><%= link_to "メモ一覧", memos_path %></li>
+      <li><%= link_to "フォローから探す", following_path %></li>
+      <li><%= link_to "マイページ", user_path(screen_name: current_user.nickname) %></li>
     </ul>
   </div>
     <p class="pull-right"><a href="#top">Top</a></p>

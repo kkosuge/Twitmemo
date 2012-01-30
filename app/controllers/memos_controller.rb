@@ -7,17 +7,15 @@ class MemosController < ApplicationController
       @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(10)
     end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @memos }
-    end
+    @users = User.order("updated_at DESC").limit(14)
+    @recentmemos = Memo.order("updated_at DESC").where(flag: 1).limit(2)
   end
 
   # GET /api/memos/:screen_name
   def search
     @memo = Memo.where(name: params[:screen_name])
     render json: @memo
-   end
+  end
 
   def create_twitter_user(hash)
     user = twitter_client.user(hash[:screen_name])
@@ -51,7 +49,6 @@ class MemosController < ApplicationController
   end
 
   # DELETE /memos/1
-  # DELETE /memos/1.json
   def destroy
     @memo = Memo.find(params[:id])
     @screen_name = @memo.name

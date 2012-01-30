@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('.sidebar').containedStickyScroll({
     duration: 200,
     closeChar: 'x',
-    closeRight: 10
+    closeRight: 0
   } );
 
   /* post */
@@ -12,7 +12,6 @@ $(document).ready(function(){
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
     var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
-    var label;
     if (flag==1){
       label = "<span class='label warning status'>Public</span>"
     } else {
@@ -24,13 +23,12 @@ $(document).ready(function(){
         url: "api/post.json",
         data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag,
         success: function(res){
-          console.log(res);
           $.meow({
             message: "Success!"
           });
           $("#send").button('reset');
-          $("input#input_screen_name").val("");
           $("#twitter_icon").empty();
+          $("input#input_screen_name").val("");
           $("#input_note_area").val("");
           $('#my-modal').modal(false);
           if ($('.' + name).length) {  
@@ -42,12 +40,11 @@ $(document).ready(function(){
                 "<a target='_blank' href='https://twitter.com/" + name +"'><img height='48px' width='48px' src='http://img.tweetimag.es/i/"+ name +"'></a>" +
               "</div>"+
               "<div style='float:left; margin-left:1em; margin-top:-10px;'>"+
-              "<h4 id='screen_name'><a href='/user/" + name + "'>"+ name +"</a> "+ label +
-              "</h4>"+
-              "<p>"+note+"</p>"+
+                "<h4 id='screen_name'><a href='/user/" + name + "'>"+ name +"</a> "+ label + "</h4>"+
+                "<p>"+ note +"</p>"+
               "</div>"+
               "<div align='right' style='margin-top:-7px;'>"+
-              "<p class='btn small default editmemo editarea' data-note='"+note+"' data-name='"+name+"' data-img='http://img.tweetimag.es/i/"+name+"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/"+res.id+"' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
+                "<p class='btn small default editmemo editarea' data-note='"+ note +"' data-name='"+ name +"' data-img='http://img.tweetimag.es/i/"+ name +"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/"+ res.id +"' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
               "</div>"+
               "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>");
               edit();   
@@ -74,11 +71,8 @@ $(document).ready(function(){
   $('#my-modal').modal(true);
   $("#input_screen_name").bind("textchange", function(){
     var getimg = setTimeout(function() {
-      var api_url = "https://api.twitter.com/1/users/show.json?screen_name="+$("#input_screen_name").val()+"&callback=?";
-      $.getJSON(api_url, function(json,status){
-      $("#twitter_icon").html($("<img/>",{ src: json.profile_image_url , class:"service-profile-icon", style: "width:4em;height:4em;" }));
-      });
-    },2000);
+      $("#twitter_icon").html($("<img/>",{ src: "http://img.tweetimag.es/i/"+$("#input_screen_name").val() , class:"service-profile-icon", style: "width:4em;height:4em;" }));
+    },1500);
 
     var getmemo = setTimeout(function() {
       var memo_url = "api/memos/"+$("#input_screen_name").val();
@@ -87,7 +81,7 @@ $(document).ready(function(){
           $("#input_note_area").val(data[i].note);
         }
       });
-    },2000);
+    },1500);
   });
 
   /* auto focus */
@@ -114,16 +108,12 @@ $(document).ready(function(){
   edit();
 
   /* close modal */
-  $("#modal_close").click(function(){
-      $('#modal-from-dom').modal(false);
-      $("input#input_screen_name").val("");
-      return false;
-  });
   $(".close").click(function(){
       $('#my-modal').modal(false);
       $("input#input_screen_name").val("");
       $("#twitter_icon").empty();
       $("#input_note_area").val("");
+      $("#send").button('reset');
       return false;
   });
 
@@ -136,5 +126,4 @@ $(document).ready(function(){
 		}, 500);
 	 return false;
 	});
-
 });

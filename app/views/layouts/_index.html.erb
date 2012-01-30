@@ -1,20 +1,89 @@
-  <div class="hero-unit">
-    <h1>Twitmemo</h1>
-    <p>｢Twitmemo｣は自分がフォローした人への印象を書き残せるサービスです｡自分がフォローした理由､その人の印象をメモ｡すぐに見返せます｡自分がどう他人にメモされているのかチェックできます｡</p>
-    <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
+<script type="text/javascript">
+$(function() {
+   $('#slider').slider({
+	 showControls: false,
+	 autoplay: true,
+	 showPosition: true,
+	 hoverPause: true,
+	 wait: 5000,
+	 fade: 500,
+	 direction: "left"
+	 });
+   });
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+  <div class="hero-unit" style="height:200px">
+    <div style="float:left; width:440px">
+      <h1>Twitmemo</h1>
+      <p>｢Twitmemo｣は自分がフォローしたユーザーへのメモを書き残せるサービスです｡自分がフォローした理由､その人の印象をメモ｡すぐに見返せます｡</p>
+      <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
+    </div>
+    <div style="float:right"><%= image_tag "logo.png", width: "220px"; %></div>
+    <div style="float:left; margin-top:15px">
+
+      <ul class="nav">
+        <li style="width:100px"><a href="https://twitter.com/share" class="twitter-share-button" data-via="hotchemi" data-lang="ja">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+
+        <li style="width:55px"><a href="http://b.hatena.ne.jp/entry/" style="margin-left:-50px" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></li>
+
+        <li style="width:65px"><g:plusone size="medium"></g:plusone></li>
+
+        <li style="width:93px"><script type="text/javascript" src="http://growbutton.com/javascripts/button.js?apikey=a154f8b0-d427-012e-f9a7-34ef8b105c30&shape=rectangle"></script></li>
+
+        <li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook-japan.com%2F&layout=button_count&show_faces=false&width=100&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></li>
+      </ul>
+
+    </div>
   </div>
 
-  <div class="row">
-    <div class="span7">
-      <h2>What is Twitmemo?</h2>
-      <p>｢Twitmemo｣は自分がフォローした人への印象を書き残せるサービスです｡自分がフォローした理由､その人の印象をメモ｡すぐに見返せます｡自分がどう他人にメモされているのかチェックできます｡</p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
+  <div id="slider" style="width: 820px; height: 170px;">
+    <div class="span14" style="margin-left:0px">
+      <div style="float:left;width:50%">
+        <h3>最近のユーザー</h3>
+        <% @users.each do |user| %>
+          <a href="https://twitter.com/<%= user.nickname %>"><img src='<%= user.img %>' width="48px" height="48px"></a>  
+        <% end %>
+      </div>
+
+      <div style="float:left;width:50%">
+        <h3>最近のメモ</h3>
+        <% @recentmemos.each do |memo| %>
+            <div style='float:left;'>
+              <img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+            </div>
+
+            <div style='float:left; margin-left:1em; margin-top:-10px;'>
+              <h4 id="screen_name"><a target='_blank' href='https://twitter.com/<%= memo.name %>'><%= memo.name%></a></h4>
+              <p><%= memo.note %></p>
+            </div>    
+
+            <div align="right" style='margin-top:-7px;'>
+              <p>メモした人 <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
+            </div>
+            <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
+            <% end %>
+      </div>
     </div>
 
-    <div class="span6">
-      <h2>How to use?</h2>
-      <p>面倒なアカウント登録は一切必要ありません｡中央か右上の｢Login with Twitter｣ボタンを押すだけですぐにサービスを利用できます｡</p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div>
+    <div class="span11" style="margin-left:100px; margin-top:10px;">
+      <div style="float:left;margin-right:30px"><%= image_tag "notes.png", width: "120px", height: "120px";  %></div>
+      <div style="margin-top:-10px; margin-left:160px">
+        <h3>What is Twitmemo?</h3>
+        <p>｢Twitmemo｣は自分がフォローしたユーザーへの印象を書き残せるサービスです｡自分がフォローした理由やその人の印象をメモ｡すぐに見返せます｡自分がどう他人にメモされているのかチェックすることもできます｡設定を非公開にすればあなた専用のメモスペースとしてご利用頂けます｡</p>
+       </div>
+     </div>
+
+    <div class="span11" style="margin-left:100px; margin-top:10px;">
+      <div style="float:left; margin-top:-10px"><%= image_tag "tw_orange.png", width: "120px", height: "120px"; %></div>
+      <div style="margin-top:-10px; margin-left:160px">
+        <h3>How to use?</h3>
+        <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウントの情報を利用してすぐにサービスを利用できます｡</p>
+       </div>
+     </div>
 
   </div>

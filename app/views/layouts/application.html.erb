@@ -8,7 +8,7 @@
     <script type="text/javascript" src="http://www.zurb.com/javascripts/plugins/jquery.textchange.min.js"></script>
     <style type="text/css">
       html, body {
-        background-color: #fff;
+        background-color: #f5f5f5;
       }
       body {
         padding-top: 40px;
@@ -37,22 +37,20 @@
       #list ul { list-style: none; }
       #list ul li a { display:block; text-decoration:none; color:#000000; background-color:#f5f5f5; line-height:20px; border-bottom-style:solid; border-bottom-width:0px; border-bottom-color:#CCCCCC; cursor:pointer; }
       #list ul li a:hover { color:#ffa500; background-repeat:repeat-x; }
-      #list  { margin-left:-20px; }
+      #list  { margin-left:-20px; }      
     </style>
   </head>
-  <body id="top">
-    <%= render 'layouts/popup' %>
-    <%= render 'layouts/about' %>
 
+  <body id="top">
   <div class = "topbar"> 
     <%= render 'layouts/topbar' %>
-  </div> <!--topbar-->
+  </div>
 
   <div class="container">
     <div class="content">
         <% if current_user -%>
-          <div class="page-header headerarea">
-          </div>
+          <%= render 'layouts/popup' %>
+          <div class="page-header headerarea"></div>
           <%= yield %>
           <%= render 'layouts/sidebar' %>
         <% else -%>

@@ -1,2 +1,2 @@
-class NoteController < BaseController 
+class NoteController < ApplicationController
 end

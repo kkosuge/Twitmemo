@@ -1,10 +1,7 @@
 class FollowingController < ApplicationController
   def index
-    @datas = getdata(params[:id])
-    
-    respond_to do |format|
-      format.json { render json: @datas }
-    end
+    @datas = getdata(params[:id]) 
+    render json: @datas
   end
 
   def getdata(num)
@@ -23,9 +20,11 @@ class FollowingController < ApplicationController
 
     users = twitter.users(userfriends)
     twitter_users = TwitterUser.where("twitter_id in (?)", userfriends)
+
     userinfo = []
     twitter_users.each{|user| userinfo << user.id}
-    memos = Memo.where("author = ? AND twitter_user_id in (?)", session[:twitter_id], users)
+    memos = Memo.where("author = ? AND twitter_user_id in (?)", session[:twitter_id], userinfo)    
+
     correct = []
     newdata=[]
 
