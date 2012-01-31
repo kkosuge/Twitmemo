@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
     session[:user_id] = user.id
     session[:twitter_id] = user.twitter_id
+    session[:screen_name] = user.nickname
     logger.debug auth.to_yaml
 
     if session[:return_to]
@@ -28,8 +29,7 @@ class SessionsController < ApplicationController
   end
  
   def logout
-    session[:user_id] = nil
-    session[:twitter_id] = nil
+    reset_session
     redirect_to root_url, :notice => 'ログアウトしました。'
   end
 end

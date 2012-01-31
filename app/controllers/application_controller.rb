@@ -2,6 +2,15 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery
   before_filter :set_return_to
+  before_filter :authenticate
+
+  def authenticate
+    if Rails.env.production?
+      authenticate_or_request_with_http_basic do |username, password|
+        username == 'twitmemo' && password == 'twitmemo'
+      end
+    end
+  end
 
   def need_oauth
     unless current_user
@@ -9,7 +18,6 @@ class ApplicationController < ActionController::Base
      return
     end
   end
-
 
   def set_return_to
     unless current_user

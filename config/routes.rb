@@ -1,7 +1,6 @@
 Twitmemo::Application.routes.draw do
   resources :memos
   root :to => "memos#index"
-
   # omniauth
   match 'auth/:provider/callback' => 'sessions#login'
   match '/logout' => 'sessions#logout', :as => :logout

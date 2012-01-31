@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120075345) do
+ActiveRecord::Schema.define(:version => 20120131094546) do
 
   create_table "memos", :force => true do |t|
     t.text     "note"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120120075345) do
     t.string   "author"
     t.integer  "twitter_user_id"
     t.string   "name"
+    t.string   "author_screen_name"
   end
 
   create_table "twitter_users", :force => true do |t|

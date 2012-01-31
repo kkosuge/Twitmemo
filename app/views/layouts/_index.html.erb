@@ -54,7 +54,7 @@
             </div>    
 
             <div align="right" style='margin-top:-7px;'>
-              <p>メモした <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
+              <p>メモした <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %></p>
             </div>
             <div class="page-header underline" style="margin-right:5px;margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             <% end %>

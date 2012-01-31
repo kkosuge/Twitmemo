@@ -38,7 +38,7 @@ class MemosController < ApplicationController
       @memo.note = params[:note]
       @memo.flag = params[:flag]
     else
-      @memo = Memo.new(name: @twitter.screen_name, note: params[:note], twitter_user_id: @twitter.id, flag: params[:flag], author: session[:twitter_id])
+      @memo = Memo.new(name: @twitter.screen_name, note: params[:note], author_screen_name: session[:screen_name], twitter_user_id: @twitter.id, flag: params[:flag], author: session[:twitter_id])
     end
 
     respond_to do |format|

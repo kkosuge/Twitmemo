@@ -13,7 +13,4 @@ module ApplicationHelper
     @count = Memo.where(author: session[:twitter_id])
     @count.count
   end
-
-
-
 end
