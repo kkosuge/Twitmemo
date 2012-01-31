@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131094546) do
+ActiveRecord::Schema.define(:version => 20120131103031) do
 
   create_table "memos", :force => true do |t|
     t.text     "note"
     t.integer  "flag"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "author"
+    t.integer  "author",             :limit => 255
     t.integer  "twitter_user_id"
     t.string   "name"
     t.string   "author_screen_name"

@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
       user = User.create_account(auth)
     end
 
-    session[:user_id] = user.id
-    session[:twitter_id] = user.twitter_id
+    session[:user_id] = user.id.to_s
+    session[:twitter_id] = user.twitter_id.to_s
     session[:screen_name] = user.nickname
     logger.debug auth.to_yaml
 
