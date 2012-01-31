@@ -1,4 +1,5 @@
 .meows {
+  z-index : 4;
   position: fixed;
   top: 0;
   right: 0;

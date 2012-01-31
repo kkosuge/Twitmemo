@@ -1,30 +1,41 @@
 $(document).ready(function(){
+  $('#my-modal').modal(true);
 
   /* count */
   $('#input_note_area').bind('textchange', function (event, previousText) {
-    $('#charactersLeft').html( 200 - parseInt($(this).val().length) );
+    $('#charactersLeft').html( 200 - parseInt($(this).val().length));
   });
 
-  /* validation */
-  function validation(){
-    $('#input_screen_name').bind('textchange', function () {
-      if ($('#input_screen_name').val().length > 0){
-        $('#send').removeClass('disabled').attr('disabled', false);
-      }
-      else{
-        $('#send').addClass('disabled').attr('disabled', true);
-      }
-    });
-    $('#input_note_area').bind('textchange', function () {
-      if ($(this).val().length > 0){
-        $('#send').removeClass('disabled').attr('disabled', false);
-      }
-      else{
-        $('#send').addClass('disabled').attr('disabled', true);
-      }
-    });
-  }
-  validation();
+  /* textchange */
+  $('#input_screen_name').bind('textchange', function () {
+    var getimg = setTimeout(function() {
+      $("#twitter_icon").html($("<img/>",{ src: "http://img.tweetimag.es/i/"+$("#input_screen_name").val() , class:"service-profile-icon", style: "width:4em;height:4em;" }));
+    },1500);
+
+    var getmemo = setTimeout(function() {
+      var memo_url = "/api/memos/"+$("#input_screen_name").val();
+      $.getJSON(memo_url, function(data){
+        for(var i in data) {
+          $("#input_note_area").val(data[i].note);
+        }
+      });
+    },1500);
+
+    if ($(this).val().length > 0 && ('#input_note_area').val().length > 0){
+      $('#send').removeClass('disabled').attr('disabled', false);
+    }
+    else{
+      $('#send').addClass('disabled').attr('disabled', true);
+    }
+  });
+  $('#input_note_area').bind('textchange', function () {
+    if ($(this).val().length > 0){
+      $('#send').removeClass('disabled').attr('disabled', false);
+    }
+    else{
+      $('#send').addClass('disabled').attr('disabled', true);
+    }
+  });
 
   /* stickyscroll */
   $('.sidebar').containedStickyScroll({
@@ -73,8 +84,7 @@ $(document).ready(function(){
               "<div align='right' style='margin-top:-7px;'>"+
                 "<p class='btn small default editmemo editarea' data-note='"+ note +"' data-name='"+ name +"' data-img='http://img.tweetimag.es/i/"+ name +"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/"+ res.id +"' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
               "</div>"+
-              "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>");
-              edit();   
+              "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>"); 
               $(".article").hover(
                 function () {
                   $(this).find(".editarea").css("visibility","visible");
@@ -94,23 +104,6 @@ $(document).ready(function(){
     });
   });
 
-  /* open modal and img show */
-  $('#my-modal').modal(true);
-  $("#input_screen_name").bind("textchange", function(){
-    var getimg = setTimeout(function() {
-      $("#twitter_icon").html($("<img/>",{ src: "http://img.tweetimag.es/i/"+$("#input_screen_name").val() , class:"service-profile-icon", style: "width:4em;height:4em;" }));
-    },1500);
-
-    var getmemo = setTimeout(function() {
-      var memo_url = "/api/memos/"+$("#input_screen_name").val();
-      $.getJSON(memo_url, function(data){
-        for(var i in data) {
-          $("#input_note_area").val(data[i].note);
-        }
-      });
-    },1500);
-  });
-
   /* auto focus */
   $("#openmodal").click(function(){
     setTimeout(function(){
@@ -119,18 +112,17 @@ $(document).ready(function(){
   });
 
   /* edit */
-    $(".editmemo").click(function(){
-      setTimeout(function(){
-        document.getElementById("input_note_area").focus();
-      }, 0);
-      var name = $(this).attr("data-name");
-      var note = $(this).attr("data-note");
-      var img = $(this).attr("data-img");
-      $("input#input_screen_name").val(name);
-      $("#input_note_area").val(note);
-      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
-      validation();
-    });
+  $(".editmemo").click(function(){
+    setTimeout(function(){
+      document.getElementById("input_note_area").focus();
+    }, 0);
+    var name = $(this).attr("data-name");
+    var note = $(this).attr("data-note");
+    var img = $(this).attr("data-img");
+    $("input#input_screen_name").val(name);
+    $("#input_note_area").val(note);
+    $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
+  });
 
   /* close modal */
   $(".close").click(function(){

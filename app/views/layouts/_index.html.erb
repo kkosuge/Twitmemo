@@ -9,12 +9,6 @@
 	   fade: 500,
 	   direction: "left"
     });
-    $('ul#portfolio').innerfade({
-      speed: 1000,
-      timeout: 5000,
-      type: 'sequence',
-      containerheight: '220px'
-    });
   });
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -29,12 +23,9 @@
       <p>｢Twitmemo｣はあなたとTwitterユーザーの出会いを記録するサービスです｡フォローした理由､第一印象を忘れる前にメモ｡毎日の出会いを記録します｡</p>
       <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
     </div>
-    <div style="float:left; margin-left:15px; margin-top:-45px">
-      <ul id="portfolio" style="list-style:none;">
-        <li><%= image_tag "logo.png", width: "220px",height:"220px"; %></li>
-        <li><%= image_tag "memo.png", width: "220px",height:"220px"; %></li>     
-      </ul>
-      </div>
+    <div style="float:left; margin-left:40px; margin-top:-45px">
+      <%= image_tag "logo.png", width: "220px",height:"220px"; %>
+    </div>
   </div>
 
   <div style="width: 820px; height: 170px;">
@@ -47,6 +38,7 @@
           <% end %>
         <% end %>
       </div>
+
       <div style="float:left;width:50%">
         <h3>最近のメモ</h3>
         <% @recentmemos.each do |memo| %>
@@ -64,11 +56,11 @@
             <div align="right" style='margin-top:-7px;'>
               <p>メモした <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
             </div>
-            <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
+            <div class="page-header underline" style="margin-right:5px;margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
     <div id="slider" style="width: 820px; height: 170px;">
     <div class="span11" style="margin-left:100px; margin-top:10px;">
@@ -86,5 +78,3 @@
         <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウント情報を利用してすぐにサービスを開始できます｡インターネット上での出会いを記録しましょう｡</p>
        </div>
      </div>
-    
-
