@@ -3,8 +3,11 @@
     $(".headerarea").append("<h2>User Info</h2>");
     $("body").css("min-height",screen.height);
     var screen_name = "<%= params[:screen_name] %>";
+    $(".about_memo").prepend(screen_name);
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
+    var img;
     $.getJSON(api_url, function(json,status){
+      img = json.profile_image_url;
       $("body").css("background-color","#"+json.profile_background_color);
       $("body").css("background-image", "url("+ json.profile_background_image_url + ")");
       if (!json.profile_background_tile) { $("body").css("background-repeat","no-repeat"); }
@@ -20,6 +23,10 @@
             "<div style='clear:left;'>" +
               "<span class='label success'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
     });
+    $("#openmodal").click(function(){
+      $("input#input_screen_name").val(screen_name); 
+      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));      
+    });
   });
 </script>
 
@@ -29,7 +36,7 @@
 			<div id="prof_info"></div>
        </div>
 
-       <h3>あなたに関するメモ <small>※公開設定のメモのみ表示されます</small></h3>
+       <h3 class="about_memo">に関するメモ <small>※公開設定のメモのみ表示</small></h3>
           <% if @memos.present? -%>
             <% @memos.each do |memo| %>
               <div class='<%= memo.name %> article' style="margin-top:20px;">
