@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       user.save!
       User.update_twitter_user(auth)
     else 
-      User.create_account(auth)
+      user = User.create_account(auth)
     end
 
     session[:user_id] = user.id
