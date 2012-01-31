@@ -48,7 +48,9 @@
         <% if @recentmemos.present? -%>
           <% @recentmemos.each do |memo| %>
             <div style='float:left;'>
-              <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>"></a>
+              <%= link_to user_path(screen_name: memo.name) do %>
+                <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>">
+              <% end %>
             </div>
 
             <div style='width:250px; float:left; margin-left:1em; margin-top:-10px;'>
