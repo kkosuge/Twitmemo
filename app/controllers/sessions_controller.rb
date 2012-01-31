@@ -16,6 +16,13 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:twitter_id] = user.twitter_id
     logger.debug auth.to_yaml
+
+    if session[:return_to]
+      return_to = session[:return_to]
+      session.delete :return_to
+      redirect_to return_to, :notice => "ログインしました。"
+      return
+    end
     redirect_to root_url, :notice => 'ログインしました。'
   end
  

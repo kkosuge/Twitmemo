@@ -1,11 +1,22 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery
+  before_filter :set_return_to
 
   def need_oauth
     unless current_user
      redirect_to root_url
      return
+    end
+  end
+
+
+  def set_return_to
+    unless current_user
+      return_to = request.path
+      unless return_to.match(/\.|login|logout|twitter|auth/)
+        session[:return_to] = return_to
+      end
     end
   end
 
