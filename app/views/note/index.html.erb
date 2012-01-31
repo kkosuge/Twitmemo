@@ -34,7 +34,7 @@
   }
 
   function appendtext(num){
-    $("#getjson").append("<div class='loading' align='center'><img src='http://www.benricho.org/loading_images/img-popular/loading-20.gif'></div>");
+    $("#getjson").append("<div class='loading' align='center'><img src='loading.gif'></div>");
     $.getJSON("api/following/"+ num, function(data){
       for(var i in data) {
         if (data[i].note){

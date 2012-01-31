@@ -5,22 +5,9 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
-    <script type="text/javascript" src="http://www.zurb.com/javascripts/plugins/jquery.textchange.min.js"></script>
     <style type="text/css">
       body {
         padding-top: 40px;
-        background:url(wood.jpg);
-      }
-      .content {
-        -webkit-box-shadow: 0 0px 0px rgba(0,0,0,.0);
-        -moz-box-shadow: 0 0px 0px rgba(0,0,0,.0);
-        box-shadow: 0 0px 0px rgba(0,0,0,.0);
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        margin-top: 20px;
-      }
-      footer p {
-        text-align: center;
       }
       .container {
         width: 820px;
@@ -31,20 +18,11 @@
       h4 {
         margin: 0px 0px -5px 0px; 
       }
-      #list ul { list-style: none; }
-      #list ul li a { text-decoration:none; color:#000000; line-height:20px; }
-      #list ul li a:hover { color:#ffa500; }
-      #list  { margin-left:-20px; }  
-      .label a { color:#fff;text-decoration:none; }
-      .label a:hover { color:#fff;text-decoration:none; }
-      .top a {color:#000}
-      a:hover{color:#ffa500}
     </style>
   </head>
+
   <body id="top">
-    <div class = "topbar"> 
-      <%= render 'layouts/topbar' %>
-    </div>
+    <div class = "topbar"><%= render 'layouts/topbar' %></div>
     <div class="container">
       <div class="content">
         <% if current_user -%>
@@ -56,9 +34,7 @@
           <%= yield %>
         <% end -%>
       </div>
-      <footer>
-        <p>&copy; Twitmemo 2012</p>
-      </footer>
+      <footer>&copy; Twitmemo 2012</footer>
     </div>
   </body>
 </html>

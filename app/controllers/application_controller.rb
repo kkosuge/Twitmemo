@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_return_to
   before_filter :authenticate
 
+  # Basic
   def authenticate
     if Rails.env.production?
       authenticate_or_request_with_http_basic do |username, password|
@@ -14,8 +15,8 @@ class ApplicationController < ActionController::Base
 
   def need_oauth
     unless current_user
-     redirect_to root_url
-     return
+      redirect_to root_url
+      return
     end
   end
 
@@ -25,19 +26,17 @@ class ApplicationController < ActionController::Base
       unless return_to.match(/\.|login|logout|twitter|auth/)
         session[:return_to] = return_to
       end
-    end
+    end 
   end
 
   def twitter_client
     user = User.find(session[:user_id]) if session[:user_id]
-
     Twitter.configure do |config|
       config.consumer_key = '0qzNniUyKkWdGIUe7kMEA'
       config.consumer_secret = 'czidLzD2WJQgSY5TBd15vBsYNzrj5FzarYOoe1fw'
       config.oauth_token = user.token
       config.oauth_token_secret = user.secret
     end
-
    @twitter_client = Twitter::Client.new
   end
 end

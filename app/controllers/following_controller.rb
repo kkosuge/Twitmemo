@@ -8,7 +8,6 @@ class FollowingController < ApplicationController
 
   def getdata(num)
     twitter = twitter_client
-
     begin
     case num = num.to_i
       when 1
@@ -20,15 +19,9 @@ class FollowingController < ApplicationController
       return [:error => e]
     end
 
-    users = twitter.users(userfriends)
-    twitter_users = TwitterUser.where("twitter_id in (?)", userfriends)
-
-    userinfo = []
-    twitter_users.each{|user| userinfo << user.id}
-    memos = Memo.where("author = ? AND twitter_user_id in (?)", session[:twitter_id], userinfo)    
-
     correct = []
     newdata=[]
+    users = twitter.users(userfriends)
 
     userfriends.each do |i|
 	   users.each do |j|
@@ -38,15 +31,15 @@ class FollowingController < ApplicationController
       end
     end
 
-    if memos.size == 0
-      return correct
-    end
+    twitter_users = TwitterUser.where("twitter_id in (?)", userfriends)
+    userinfo = twitter_users.map{|user| user.id}
+    memos = Memo.where("author = ? AND twitter_user_id in (?)", session[:twitter_id], userinfo)  
 
 	 correct.each do |i|
       newdata << Hash[i]
       memos.each do |m|
 		  if i.screen_name == m.name
-		    newdata[-1]['note'] = m.note
+          newdata[-1]['note'] = m.note
         end
       end
     end

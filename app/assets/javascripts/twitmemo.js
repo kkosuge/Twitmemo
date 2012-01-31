@@ -42,7 +42,7 @@ $(document).ready(function(){
     duration: 200,
     closeChar: 'x',
     closeRight: 0
-  } );
+  });
 
   /* post */
   $("#send").click(function(){
@@ -64,11 +64,7 @@ $(document).ready(function(){
           $.meow({
             message: "Success!"
           });
-          $("#send").button('reset');
-          $("#twitter_icon").empty();
-          $("input#input_screen_name").val("");
-          $("#input_note_area").val("");
-          $('#my-modal').modal(false);
+          reset();
           if ($("strong").length) {  
             $("strong").remove();
           }  
@@ -129,14 +125,19 @@ $(document).ready(function(){
 
   /* close modal */
   $(".close").click(function(){
-      $('#my-modal').modal(false);
-      $("input#input_screen_name").val("");
-      $("#twitter_icon").empty();
-      $("#input_note_area").val("");
-      $("#send").button('reset');
+      reset();
       $('#send').addClass('disabled').attr('disabled', true);
       return false;
   });
+
+  /* reset */
+  function reset(){
+    $('#my-modal').modal(false);
+    $("input#input_screen_name").val("");
+    $("#twitter_icon").empty();
+    $("#input_note_area").val("");
+    $("#send").button('reset');
+  }
 
   /* scroll */
   $("a[href^=#]").click(function(){
