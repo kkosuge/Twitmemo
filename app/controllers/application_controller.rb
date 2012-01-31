@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def twitter_client
     user = User.find(session[:user_id]) if session[:user_id]
 

@@ -16,7 +16,7 @@ class MemosController < ApplicationController
 
   # GET /api/memos/:screen_name
   def search
-    @memo = Memo.where(name: params[:screen_name])
+    @memo = Memo.where(name: params[:screen_name] && author: session[:twitter_id])
     render json: @memo
   end
 
