@@ -32,16 +32,21 @@
     <div class="span14" style="margin-top:-10px;">
       <div style="float:left;width:50%">
         <h3>最近のユーザー</h3>
-        <% @users.each do |user| %>
-          <%= link_to user_path(screen_name: user.nickname) do %>
-            <img src='<%= user.img %>' width="48px" height="48px">
+        <% if @users.present? -%>
+          <% @users.each do |user| %>
+            <%= link_to user_path(screen_name: user.nickname) do %>
+              <img src='<%= user.img %>' width="48px" height="48px">
+            <% end %>
           <% end %>
-        <% end %>
+        <% else -%>
+          <strong>ユーザーはいません｡</strong>
+        <% end -%>
       </div>
 
       <div style="float:left;width:50%">
         <h3>最近のメモ</h3>
-        <% @recentmemos.each do |memo| %>
+        <% if @resentmemos.present? -%>
+          <% @recentmemos.each do |memo| %>
             <div style='float:left;'>
               <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>"></a>
             </div>
@@ -57,7 +62,10 @@
               <p>メモした <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %></p>
             </div>
             <div class="page-header underline" style="margin-right:5px;margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
-            <% end %>
+          <% end %>
+        <% else -%>
+          <strong>メモはありません｡</strong>
+        <% end -%>
         </div>
       </div>
     </div>
