@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     if user = User.find_by_nickname(auth['user_info']['nickname'])
       user.img = auth['user_info']['image']
       user.nickname = auth['user_info']['nickname']
+      user.name = auth['user_info']['name']
       user.token = auth['credentials']['token']
       user.secret = auth['credentials']['secret']
       user.save!
