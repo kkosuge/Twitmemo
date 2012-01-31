@@ -1,9 +1,11 @@
 class Memo < ActiveRecord::Base
   belongs_to :twitter_user
 
-  validates :name,    :presence => true
+  validates :name,    :presence => true,
+                      :length => {:maximum => 15}
   
-  validates :note,    :presence => true
+  validates :note,    :presence => true,
+                      :length => {:maximum => 200}
 
   validates :flag,    :presence => true
 

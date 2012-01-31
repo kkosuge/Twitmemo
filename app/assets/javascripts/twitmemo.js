@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+  /* count */
+  $('#input_note_area').bind('textchange', function (event, previousText) {
+    $('#charactersLeft').html( 200 - parseInt($(this).val().length) );
+  });
+
   /* validation */
   function validation(){
     $('#input_screen_name').bind('textchange', function () {
@@ -52,12 +58,6 @@ $(document).ready(function(){
           $("input#input_screen_name").val("");
           $("#input_note_area").val("");
           $('#my-modal').modal(false);
-
-          if ($(name + "_memoarea")) {  
-            $(this).append(note);
-            console.log($(name + "_memoarea").text());
-          } 
-
           if ($('.' + name).length) {  
             $('.' + name).remove();
           }  

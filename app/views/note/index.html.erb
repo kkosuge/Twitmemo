@@ -23,7 +23,12 @@
       }, 0);
       var name = $(this).parent().parent().parent().find('.screen_name').text().slice(1);
       var img = $(this).parents().find('img').attr('src');
+      var note = $(this).parent().parent().find('.memoarea').text();
+      if (note == "メモがありません") {
+        note = "";
+      } 
       $("input#input_screen_name").val(name);
+      $("#input_note_area").val(note);
       $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
     });  
   }
@@ -35,9 +40,8 @@
         if (data[i].note){
           note = data[i].note;
         } else {
-          note= "まだメモがありません";
+          note= "メモがありません";
         }
-
         $("#getjson").append(
           "<div class='well'>" +
             "<div style= 'float:left;'>" +
@@ -49,8 +53,8 @@
               "<span class='label'>Following</span><a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/following'><strong> "+ data[i].friends_count + "</strong></a>" +
               "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong> " + data[i].followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
-              "<span class='label success'>Profile</span><br/><p style='margin-top: 5px;'>"+ data[i].description + "</p>"+
-              "<span class='label warning'>Memo</span><br/><p class='"+ data[i].screen_name +"_memoarea' style='margin-top: 5px;'>"+ note + "</p>"+
+              "<span class='label success'>Profile</span><br/><p style='style='word-break:break-all; margin-top: 5px;'>"+ data[i].description + "</p>"+
+              "<span class='label warning'>Memo</span><br/><p style='word-break:break-all; margin-top:5px;' class='memoarea'>"+ note + "</p>"+
             "<div class='page-header' style='margin-top: -30px;'></div>" +
             "<div align='right' style='margin: -10px -5px -15px -10px;'>" +
               "<p class='btn primary newmemo' data-controls-modal='my-modal' data-backdrop='static'>Memo</p></div>" + "</div>"); }

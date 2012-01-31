@@ -23,36 +23,21 @@
   })();
 </script>
 
-  <div class="hero-unit" style="height:200px">
-    <div style="float:left; width:440px">
+  <div class="hero-unit" style="height:135px">
+    <div style="float:left; width:440px; margin-top:-30px">
       <h1>Twitmemo</h1>
       <p>｢Twitmemo｣はあなたとTwitterユーザーの出会いを記録するサービスです｡フォローした理由､第一印象を忘れる前にメモ｡毎日の出会いを記録します｡</p>
       <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
     </div>
-    <div style="float:right">
+    <div style="float:left; margin-left:15px; margin-top:-45px">
       <ul id="portfolio" style="list-style:none;">
         <li><%= image_tag "logo.png", width: "220px",height:"220px"; %></li>
-        <li><%= image_tag "memo.png", width: "220px",height:"220<D-r>px"; %></li>     
+        <li><%= image_tag "memo.png", width: "220px",height:"220px"; %></li>     
       </ul>
       </div>
-
-    <div style="float:left; margin-top:15px">
-      <ul class="nav">
-        <li style="width:100px"><a href="https://twitter.com/share" class="twitter-share-button" data-via="hotchemi" data-lang="ja">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-
-        <li style="width:55px"><a href="http://b.hatena.ne.jp/entry/" style="margin-left:-50px" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></li>
-
-        <li style="width:65px"><g:plusone size="medium"></g:plusone></li>
-
-        <li style="width:93px"><script type="text/javascript" src="http://growbutton.com/javascripts/button.js?apikey=a154f8b0-d427-012e-f9a7-34ef8b105c30&shape=rectangle"></script></li>
-
-        <li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook-japan.com%2F&layout=button_count&show_faces=false&width=100&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></li>
-      </ul>
-
-    </div>
   </div>
 
-  <div id="slider" style="width: 820px; height: 170px;">
+  <div style="width: 820px; height: 170px;">
     <div class="span14" style="margin-top:-10px;">
       <div style="float:left;width:50%">
         <h3>最近のユーザー</h3>
@@ -69,9 +54,11 @@
               <img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
             </div>
 
-            <div style='float:left; margin-left:1em; margin-top:-10px;'>
+            <div style='width:250px; float:left; margin-left:1em; margin-top:-10px;'>
               <h4 id="screen_name"><%= link_to memo.name,user_path(screen_name: memo.name) %></h4>
-              <p><%= memo.note %></p>
+              <div style="height:35px; overflow:hidden;">
+                <span style="word-break:break-all;"><%= memo.note %></span>
+              </div>
             </div>    
 
             <div align="right" style='margin-top:-7px;'>
@@ -81,7 +68,9 @@
             <% end %>
       </div>
     </div>
+  </div>
 
+    <div id="slider" style="width: 820px; height: 170px;">
     <div class="span11" style="margin-left:100px; margin-top:10px;">
       <div style="float:left;margin-right:30px"><%= image_tag "note.png", width: "120px", height: "120px";  %></div>
       <div style="margin-top:-10px; margin-left:160px">
@@ -97,3 +86,5 @@
         <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウント情報を利用してすぐにサービスを開始できます｡インターネット上での出会いを記録しましょう｡</p>
        </div>
      </div>
+    
+

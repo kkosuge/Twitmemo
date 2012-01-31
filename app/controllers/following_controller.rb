@@ -45,10 +45,8 @@ class FollowingController < ApplicationController
 	 correct.each do |i|
       newdata << Hash[i]
       memos.each do |m|
-		  if Hash[i]['screen_name'] == m.name
+		  if i.screen_name == m.name
 		    newdata[-1]['note'] = m.note
-        else
-		  	 newdata[-1]['note'] = nil
         end
       end
     end

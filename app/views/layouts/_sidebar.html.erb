@@ -15,7 +15,9 @@
           <li><%= link_to "メモされ一覧", user_path(screen_name: current_user.nickname) %></li>
         </ul>
       </div>
+    <% else -%>
+
+    <% end -%>
       <p class="pull-right top"><a href="#top">Topへ</a></p>
     </div>
   </div>
-<% end -%>

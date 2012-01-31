@@ -24,14 +24,14 @@
               <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
             </div>
 
-            <div style='float:left; margin-left:1em; margin-top:-10px;'>
+            <div style='width:350px; float:left; margin-left:1em; margin-top:-10px;'>
               <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %>
               <% if memo.flag == 1 -%>
                 <span class="label warning status">Public</span>
               <% else -%>
                 <span class="label notice status">Private</span>
               <% end %></h4>
-              <p><%= memo.note %></p>
+              <p style="word-break: break-all;"><%= memo.note %></p>
             </div>    
 
             <div align="right" style='margin-top:-7px;'>
