@@ -69,6 +69,9 @@ $(document).ready(function(){
           $("input#input_screen_name").val("");
           $("#input_note_area").val("");
           $('#my-modal').modal(false);
+          if ($("strong").length) {  
+            $("strong").remove();
+          }  
           if ($('.' + name).length) {  
             $('.' + name).remove();
           }  

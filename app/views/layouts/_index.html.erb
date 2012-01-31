@@ -43,7 +43,7 @@
         <h3>最近のメモ</h3>
         <% @recentmemos.each do |memo| %>
             <div style='float:left;'>
-              <img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+              <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>"></a>
             </div>
 
             <div style='width:250px; float:left; margin-left:1em; margin-top:-10px;'>

@@ -41,17 +41,13 @@
             <% @memos.each do |memo| %>
               <div class='<%= memo.name %> article' style="margin-top:20px;">
                 <div style='float:left;'>
-                  <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.name %>"></a>
+                  <a target='_blank' href='https://twitter.com/<%= memo.author_screen_name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"></a>
               </div>
 
               <div style='float:left; margin-left:1em; margin-top:-10px;'>
-                <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %></h4>
+                <h4><%= link_to memo.author_screen_name, user_path(screen_name: memo.author_screen_name) %></h4>
                 <p><%= memo.note %></p>
               </div>    
-
-              <div align="right" style='margin-top:-7px;'>
-                <p>メモした <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %></p>
-              </div>
 
               <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             </div>
