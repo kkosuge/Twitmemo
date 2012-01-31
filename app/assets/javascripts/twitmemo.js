@@ -65,8 +65,8 @@ $(document).ready(function(){
             message: "Success!"
           });
           reset();
-          if ($("strong").length) {  
-            $("strong").remove();
+          if ($(".no_memo").length) {  
+            $(".no_memo").remove();
           }  
           if ($('.' + name).length) {  
             $('.' + name).remove();
