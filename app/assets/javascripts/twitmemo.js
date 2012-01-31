@@ -71,6 +71,10 @@ $(document).ready(function(){
           if ($('.' + name).length) {  
             $('.' + name).remove();
           }  
+          if ($('.'+ name +'memoarea').length) {  
+            $('.'+ name +'memoarea').html("");
+            $('.'+ name +'memoarea').html(note);
+          }  
           $(".memo_area").prepend(
             "<div class='" + name +" article'>"+
               "<div style='float:left;'>"+
