@@ -6,11 +6,7 @@ module ApplicationHelper
   def memo_count
     @users = User.find(session[:user_id]) 
     @twitter ||= TwitterUser.find_by_screen_name(@users.nickname)
-    begin
-      @count = @twitter.memos.count
-    rescue
-      @count = 0
-    end
+    @count = @twitter.memos.count
   end
 
   def memoed_count

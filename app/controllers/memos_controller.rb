@@ -3,9 +3,9 @@ class MemosController < ApplicationController
   def index
     if current_user
       if params[:keyword].present?
-        @memos = Memo.where(author: session[:twitter_id].to_s).keyword_search(params[:keyword]).page(params[:page])
+        @memos = Memo.where(author: session[:twitter_id]).keyword_search(params[:keyword]).page(params[:page])
       else
-        @memos = Memo.where(author: session[:twitter_id].to_s).order("updated_at DESC").page(params[:page]).per(10)
+        @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(10)
       end
     else
       @users = User.order("updated_at DESC").limit(14)
