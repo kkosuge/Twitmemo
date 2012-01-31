@@ -1,6 +1,6 @@
 <script type="text/javascript"> 
   $(document).ready(function(){
-      $(".headerarea").append("<h2>Following</h2>");
+    $(".headerarea").append("<h2>Following</h2>");
     appendtext(1);
     var num = 2;
     var loadingflag = 0;
@@ -13,7 +13,7 @@
         } 
         catch(e){ alert(e); } 
         finally { num ++; }
-      }
+        }
       });
 
   function editassist(){
@@ -50,10 +50,10 @@
               "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong> " + data[i].followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
               "<span class='label success'>Profile</span><br/><p style='margin-top: 5px;'>"+ data[i].description + "</p>"+
-              "<span class='label warning'>Memo</span><br/><p style='margin-top: 5px;'>"+ note + "</p>"+
+              "<span class='label warning'>Memo</span><br/><p class='"+ data[i].screen_name +"_memoarea' style='margin-top: 5px;'>"+ note + "</p>"+
             "<div class='page-header' style='margin-top: -30px;'></div>" +
             "<div align='right' style='margin: -10px -5px -15px -10px;'>" +
-              "<p class='btn info small newmemo' data-controls-modal='my-modal' data-backdrop='static'>Memo</p></div>" + "</div>"); }
+              "<p class='btn primary newmemo' data-controls-modal='my-modal' data-backdrop='static'>Memo</p></div>" + "</div>"); }
       loadingflag=0;
       $('#getjson .loading').remove();
       editassist();

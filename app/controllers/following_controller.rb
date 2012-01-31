@@ -1,4 +1,6 @@
 class FollowingController < ApplicationController
+  before_filter :need_oauth, :only => :index
+
   def index
     @datas = getdata(params[:id]) 
     render json: @datas

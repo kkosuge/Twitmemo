@@ -1,14 +1,17 @@
 class MemosController < ApplicationController
   # GET /memos
   def index
-    if params[:keyword].present?
-      @memos = Memo.keyword_search(params[:keyword]).page(params[:page])
+    if current_user
+      if params[:keyword].present?
+        @memos = Memo.where(author: session[:twitter_id]).keyword_search(params[:keyword]).page(params[:page])
+      else
+        @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(10)
+      end
     else
-      @memos = Memo.where(author: session[:twitter_id]).order("updated_at DESC").page(params[:page]).per(10)
+      @users = User.order("updated_at DESC").limit(14)
+      @recentmemos = Memo.order("updated_at DESC").where(flag: 1).limit(2)
+      render 'before_oauth'
     end
-
-    @users = User.order("updated_at DESC").limit(14)
-    @recentmemos = Memo.order("updated_at DESC").where(flag: 1).limit(2)
   end
 
   # GET /api/memos/:screen_name
@@ -19,6 +22,7 @@ class MemosController < ApplicationController
 
   def create_twitter_user(hash)
     user = twitter_client.user(hash[:screen_name])
+    raise unless user
     @twitter = TwitterUser.new(twitter_id:user.id , screen_name: hash[:screen_name], img_url: user.profile_image_url)
     @twitter.save!
     return @twitter

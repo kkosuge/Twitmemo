@@ -7,9 +7,6 @@
     <%= javascript_include_tag "application" %>
     <script type="text/javascript" src="http://www.zurb.com/javascripts/plugins/jquery.textchange.min.js"></script>
     <style type="text/css">
-      html, body {
-        background-color: #f5f5f5;
-      }
       body {
         padding-top: 40px;
       }
@@ -17,9 +14,6 @@
         -webkit-box-shadow: 0 0px 0px rgba(0,0,0,.0);
         -moz-box-shadow: 0 0px 0px rgba(0,0,0,.0);
         box-shadow: 0 0px 0px rgba(0,0,0,.0);
-      }
-      .headerarea, .underline {
-        background-color: #fff;
       }
       footer p {
         text-align: center;
@@ -33,31 +27,30 @@
       h4 {
         margin: 0px 0px -5px 0px; 
       }
-      /* LIST */
       #list ul { list-style: none; }
-      #list ul li a { display:block; text-decoration:none; color:#000000; background-color:#f5f5f5; line-height:20px; border-bottom-style:solid; border-bottom-width:0px; border-bottom-color:#CCCCCC; cursor:pointer; }
-      #list ul li a:hover { color:#ffa500; background-repeat:repeat-x; }
-      #list  { margin-left:-20px; }      
+      #list ul li a { text-decoration:none; color:#000000; line-height:20px; }
+      #list ul li a:hover { color:#ffa500; }
+      #list  { margin-left:-20px; }  
+      .label a, a:hover { color:#fff;text-decoration:none; }
+      .top a {color:#000}
+      a:hover{color:#ffa500}
     </style>
   </head>
-
   <body id="top">
-  <div class = "topbar"> 
-    <%= render 'layouts/topbar' %>
-  </div>
-
-  <div class="container">
-    <div class="content">
+    <div class = "topbar"> 
+      <%= render 'layouts/topbar' %>
+    </div>
+    <div class="container">
+      <div class="content">
         <% if current_user -%>
-          <%= render 'layouts/popup' %>
-          <div class="page-header headerarea"></div>
+          <div class="page-header headerarea"></div> 
           <%= yield %>
           <%= render 'layouts/sidebar' %>
-        <% else -%>
-          <%= render 'layouts/index' %>
+          <%= render 'layouts/popup' %>
+        <% else %>
+          <%= yield %>
         <% end -%>
       </div>
-
       <footer>
         <p>&copy; Twitmemo 2012</p>
       </footer>

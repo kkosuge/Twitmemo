@@ -1,15 +1,21 @@
 <script type="text/javascript">
-$(function() {
-   $('#slider').slider({
-	 showControls: false,
-	 autoplay: true,
-	 showPosition: true,
-	 hoverPause: true,
-	 wait: 5000,
-	 fade: 500,
-	 direction: "left"
-	 });
-   });
+  $(function() {
+    $('#slider').slider({
+	   showControls: false,
+	   autoplay: true,
+	   showPosition: true,
+	   hoverPause: true,
+	   wait: 5000,
+	   fade: 500,
+	   direction: "left"
+    });
+    $('ul#portfolio').innerfade({
+      speed: 1000,
+      timeout: 5000,
+      type: 'sequence',
+      containerheight: '220px'
+    });
+  });
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
     po.src = 'https://apis.google.com/js/plusone.js';
@@ -20,12 +26,17 @@ $(function() {
   <div class="hero-unit" style="height:200px">
     <div style="float:left; width:440px">
       <h1>Twitmemo</h1>
-      <p>｢Twitmemo｣は自分がフォローしたユーザーへのメモを書き残せるサービスです｡自分がフォローした理由､その人の印象をメモ｡すぐに見返せます｡</p>
+      <p>｢Twitmemo｣はあなたとTwitterユーザーの出会いを記録するサービスです｡フォローした理由､第一印象を忘れる前にメモ｡毎日の出会いを記録します｡</p>
       <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
     </div>
-    <div style="float:right"><%= image_tag "logo.png", width: "220px"; %></div>
-    <div style="float:left; margin-top:15px">
+    <div style="float:right">
+      <ul id="portfolio" style="list-style:none;">
+        <li><%= image_tag "logo.png", width: "220px",height:"220px"; %></li>
+        <li><%= image_tag "memo.png", width: "220px",height:"220<D-r>px"; %></li>     
+      </ul>
+      </div>
 
+    <div style="float:left; margin-top:15px">
       <ul class="nav">
         <li style="width:100px"><a href="https://twitter.com/share" class="twitter-share-button" data-via="hotchemi" data-lang="ja">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
 
@@ -42,14 +53,15 @@ $(function() {
   </div>
 
   <div id="slider" style="width: 820px; height: 170px;">
-    <div class="span14" style="margin-left:0px">
+    <div class="span14" style="margin-top:-10px;">
       <div style="float:left;width:50%">
         <h3>最近のユーザー</h3>
         <% @users.each do |user| %>
-          <a href="https://twitter.com/<%= user.nickname %>"><img src='<%= user.img %>' width="48px" height="48px"></a>  
+          <%= link_to user_path(screen_name: user.nickname) do %>
+            <img src='<%= user.img %>' width="48px" height="48px">
+          <% end %>
         <% end %>
       </div>
-
       <div style="float:left;width:50%">
         <h3>最近のメモ</h3>
         <% @recentmemos.each do |memo| %>
@@ -58,12 +70,12 @@ $(function() {
             </div>
 
             <div style='float:left; margin-left:1em; margin-top:-10px;'>
-              <h4 id="screen_name"><a target='_blank' href='https://twitter.com/<%= memo.name %>'><%= memo.name%></a></h4>
+              <h4 id="screen_name"><%= link_to memo.name,user_path(screen_name: memo.name) %></h4>
               <p><%= memo.note %></p>
             </div>    
 
             <div align="right" style='margin-top:-7px;'>
-              <p>メモした人 <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
+              <p>メモした <img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author %>"></p> 
             </div>
             <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             <% end %>
@@ -71,19 +83,17 @@ $(function() {
     </div>
 
     <div class="span11" style="margin-left:100px; margin-top:10px;">
-      <div style="float:left;margin-right:30px"><%= image_tag "notes.png", width: "120px", height: "120px";  %></div>
+      <div style="float:left;margin-right:30px"><%= image_tag "note.png", width: "120px", height: "120px";  %></div>
       <div style="margin-top:-10px; margin-left:160px">
         <h3>What is Twitmemo?</h3>
-        <p>｢Twitmemo｣は自分がフォローしたユーザーへの印象を書き残せるサービスです｡自分がフォローした理由やその人の印象をメモ｡すぐに見返せます｡自分がどう他人にメモされているのかチェックすることもできます｡設定を非公開にすればあなた専用のメモスペースとしてご利用頂けます｡</p>
+        <p>あの人をフォローした理由が思い出せない時､ありませんか？ そんな時はTwitmemoを使ってフォローした理由をメモしておきましょう｡自分がどう評価されているかチェックすることもできます｡設定を非公開にすればあなた専用のメモスペースとしてご利用頂けます｡</p>
        </div>
      </div>
 
     <div class="span11" style="margin-left:100px; margin-top:10px;">
-      <div style="float:left; margin-top:-10px"><%= image_tag "tw_orange.png", width: "120px", height: "120px"; %></div>
+      <div style="float:left; margin-top:-10px"><%= image_tag "twitter.png", width: "120px", height: "120px"; %></div>
       <div style="margin-top:-10px; margin-left:160px">
         <h3>How to use?</h3>
-        <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウントの情報を利用してすぐにサービスを利用できます｡</p>
+        <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウント情報を利用してすぐにサービスを開始できます｡インターネット上での出会いを記録しましょう｡</p>
        </div>
      </div>
-
-  </div>

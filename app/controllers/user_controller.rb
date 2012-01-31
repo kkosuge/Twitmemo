@@ -8,6 +8,10 @@ class UserController < ApplicationController
         return
       end
    else
+     unless current_user
+       redirect_to root_path
+       return
+     end
       @users = User.find(session[:user_id]) 
    end
 

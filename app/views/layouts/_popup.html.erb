@@ -1,17 +1,17 @@
 <div id="my-modal" class="modal hide">
 	<div class="modal-header">
-   	<a href="#" class="close">&times;</a>
+     <a href="#" class="close">&times;</a>
       <span id="twitter_icon" style="float:left;"></span>
 
       <div class="input-prepend" style="margin-left:6.5em;height:3.5em;padding-top:1em;">
       	<span class="add-on">@</span>
-         <input type="text" id="input_screen_name" class="span6" placeholder="SCREEN NAME"/>
+         <input type="text" id="input_screen_name" class="span6 input_screen_name" placeholder="SCREEN NAME"/>
          <span class="help-block">Enter screen name and show icon...</span>
      	</div>
   </div>
 
   <div class="modal-body">
-    <textarea class="xxlarge" id="input_note_area" raws="5" style="height:7em" placeholder="MEMO"></textarea>
+    <textarea class="xxlarge" id="input_note_area" raws="5" style="width: 600px; height:7em;" placeholder="MEMO"></textarea>
   </div>
 
   <div class="modal-footer">
@@ -19,6 +19,6 @@
         <input type="checkbox" name="private" id="private"/>
         <span>Private</span>
       </label>
-    <button id="send" data-loading-text="Sending..." class="btn info loading">Memo</button>
+    <button id="send" data-loading-text="Sending..." class="btn primary loading" disabled="TRUE">Memo</button>
   </div>
 </div>

@@ -3,11 +3,11 @@
     <h3><%= link_to 'Twitmemo',root_path %></h3>
     <% if current_user -%>
       <%= form_tag(root_path, :method => :get) do %>
-        <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索"%>
+        <%= search_field_tag :keyword ,nil,:placeholder => "メモ検索"%>
       <% end -%>
-      <p class="pull-right"><a href=""><%= link_to 'Sign out', logout_path, %></a></p>
+      <p class="pull-right"><%= link_to 'Sign out', logout_path, %></p>
     <% else -%>
-      <p class="pull-right"><a href=""><%= link_to 'Sign in', 'auth/twitter' %></a><p>
+      <p class="pull-right"><%= link_to 'Sign in', '/auth/twitter' %><p>
     <% end -%>
   </div>
 </div>
