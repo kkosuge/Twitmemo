@@ -39,6 +39,7 @@ $(document).ready(function(){
       $('#send').addClass('disabled').attr('disabled', true);
     }
   });
+
   $('#input_note_area').bind('textchange', function () {
     if ($(this).val().length > 0){
       $('#send').removeClass('disabled').attr('disabled', false);

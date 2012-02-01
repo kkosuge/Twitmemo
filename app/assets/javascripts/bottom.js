@@ -1,7 +1,6 @@
 (function($){
 	$.fn.bottom = function(options) {
 		var defaults = {
-			// how close to the scrollbar is to the bottom before triggering the event
 			proximity: 0.01
 		};
 		var options = $.extend(defaults, options);
