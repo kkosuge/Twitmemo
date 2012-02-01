@@ -47,7 +47,7 @@
        <h3 class="about_memo">さんに関するメモ <small>※公開設定のみ</small></h3>
           <% if @memos.present? -%>
             <% @memos.each do |memo| %>
-              <div class='article' style="margin-top:10px;">
+              <div class='<%= memo.name %> article' style="margin-top:10px;">
                 <div style='float:left;'>
                   <a target='_blank' href='https://twitter.com/<%= memo.author_screen_name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"></a>
               </div>
@@ -67,7 +67,7 @@
       <% else -%>
         <h4>まだこのユーザーに関するメモがありません｡</h4><br/>
         <% if current_user -%>
-          <p id="openmodal" class="btn btn-info" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true">Memo</p>
+          <p id="openmodal" class="btn btn-primary editmemo">Memo</p>
         <% else -%>
           <p><%= link_to 'Sign in', '/auth/twitter' ,:class=>"btn btn-info" %><p>
         <% end -%>

@@ -136,6 +136,7 @@ $(document).ready(function(){
   /* close modal */
   $(".close").click(function(){
       $('#send').addClass('disabled').attr('disabled', true);
+      reset();
       return false;
   });
 
