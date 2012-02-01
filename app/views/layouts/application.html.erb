@@ -6,9 +6,6 @@
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
     <style type="text/css">
-      body {
-        padding-top: 40px;
-      }
       .container {
         width: 820px;
       }
@@ -18,6 +15,8 @@
       h4 {
         margin: 0px 0px -5px 0px; 
       }
+      .navi {list-style:none;}
+      .navi li {float:left;}
     </style>
   </head>
 
@@ -26,7 +25,7 @@
     <div class="container">
       <div class="content">
         <% if current_user -%>
-          <div class="page-header headerarea"></div> 
+          <div class="headerarea"></div> 
           <%= yield %>
           <%= render 'layouts/sidebar' %>
           <%= render 'layouts/popup' %>
@@ -34,7 +33,7 @@
           <%= yield %>
         <% end -%>
       </div>
-      <footer>&copy; Twitmemo 2012</footer>
+      <footer><p>&copy; Twitmemo 2012</p></footer>
     </div>
   </body>
 </html>

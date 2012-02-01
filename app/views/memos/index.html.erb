@@ -13,32 +13,31 @@
 </script> 
 
 <div class="row">
-  <div class="span9">
+  <div class="span6">
     <p><%= "Keyword : #{params[:keyword]}" if params[:keyword].present? %></p>
     <div class="memo_area">
       <% if @memos.present? -%> 
         <% @memos.each do |memo| %>
           <div class='<%= memo.name %> article'>
             <div style='float:left;'>
-              <a target='_blank' href='https://twitter.com/<%= memo.name %>'><img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>"></a>
+              <%= link_to user_path(screen_name: memo.name) do %><img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>"></a><% end %>
             </div>
 
-            <div style='width:350px; float:left; margin-left:1em; margin-top:-10px;'>
-              <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %>
+            <div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>
+              <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %> 
               <% if memo.flag == 1 -%>
-                <span class="label warning status">Public</span>
+                <span class="label label-warning status">Public</span>
               <% else -%>
-                <span class="label notice status">Private</span>
+                <span class="label label-info status">Private</span>
               <% end %></h4>
-              <p style="word-break: break-all;"><%= memo.note %></p>
+              <p style="margin-top:5px; word-break: break-all;"><%= memo.note %></p>
             </div>    
 
-            <div align="right" style='margin-top:-7px;'>
-              <p class='btn small default editmemo editarea' data-id="<%= memo.id %>" data-note="<%= memo.note %>" data-name="<%= memo.name %>" data-img="<%= memo.twitter_user.img_url %>" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true" style="visibility:hidden;">Edit</p>
-              <span class="editarea" style="visibility:hidden;"><%= link_to 'Delete', memo, confirm: 'メモを削除しますか?', method: :delete, remote: true, class:"btn small danger" %></span>
+            <div style="float:right;margin-top:-45px">
+              <span class='editmemo editarea' data-id="<%= memo.id %>" data-note="<%= memo.note %>" data-name="<%= memo.name %>" data-img="<%= memo.twitter_user.img_url %>" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true" style="visibility:hidden;"><i class="icon-edit"></i>Edit</span>
+              <span class="editarea" style="visibility:hidden;"><i class="icon-trash"></i><%= link_to 'Delete', memo, confirm: 'メモを削除しますか?', method: :delete, remote: true %></span>
             </div>
-
-            <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
+      <div class="page-header underline" style="margin-right:5px;margin-top:-20px;margin-bottom:10px; padding: 0px 0px 0px 0px; clear:both;"></div>
           </div>
         <% end %>
       <% else -%>

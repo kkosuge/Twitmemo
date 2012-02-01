@@ -1,5 +1,16 @@
 $(document).ready(function(){
-  $('#my-modal').modal(true);
+  /* open */
+  $("#open").click(function(){
+    $('#my-modal').modal('show');
+    setTimeout(function(){
+      document.getElementById("input_screen_name").focus();
+    }, 0);
+  });
+
+  /* hidden event */
+  $('#my-modal').on('hidden', function () {
+    reset();
+  })
 
   /* count */
   $('#input_note_area').bind('textchange', function (event, previousText) {
@@ -10,7 +21,7 @@ $(document).ready(function(){
   $('#input_screen_name').bind('textchange', function () {
     var getimg = setTimeout(function() {
       $("#twitter_icon").html($("<img/>",{ src: "http://img.tweetimag.es/i/"+$("#input_screen_name").val() , class:"service-profile-icon", style: "width:4em;height:4em;" }));
-    },1500);
+    },1000);
 
     var getmemo = setTimeout(function() {
       var memo_url = "/api/memos/"+$("#input_screen_name").val();
@@ -19,7 +30,7 @@ $(document).ready(function(){
           $("#input_note_area").val(data[i].note);
         }
       });
-    },1500);
+    },1000);
 
     if ($(this).val().length > 0 && ('#input_note_area').val().length > 0){
       $('#send').removeClass('disabled').attr('disabled', false);
@@ -50,6 +61,7 @@ $(document).ready(function(){
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
     var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
+    var post = 0; if ($('#twitter').is(':checked') == true) { post = 1; }
     if (flag==1){
       label = "<span class='label warning status'>Public</span>"
     } else {
@@ -59,7 +71,7 @@ $(document).ready(function(){
       $.ajax({
         type: "POST",
         url: "/api/post.json",
-        data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag,
+        data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag + "&post=" + post,
         success: function(res){
           $.meow({
             message: "Success!"
@@ -107,15 +119,9 @@ $(document).ready(function(){
     });
   });
 
-  /* auto focus */
-  $("#openmodal").click(function(){
-    setTimeout(function(){
-      document.getElementById("input_screen_name").focus();
-    }, 0);
-  });
-
   /* edit */
   $(".editmemo").click(function(){
+    $('#my-modal').modal(true);
     setTimeout(function(){
       document.getElementById("input_note_area").focus();
     }, 0);
@@ -129,14 +135,13 @@ $(document).ready(function(){
 
   /* close modal */
   $(".close").click(function(){
-      reset();
       $('#send').addClass('disabled').attr('disabled', true);
       return false;
   });
 
   /* reset */
   function reset(){
-    $('#my-modal').modal(false);
+    $('#my-modal').modal('hide');
     $("input#input_screen_name").val("");
     $("#twitter_icon").empty();
     $("#input_note_area").val("");
@@ -152,4 +157,5 @@ $(document).ready(function(){
 		}, 500);
 	 return false;
 	});
+  
 });

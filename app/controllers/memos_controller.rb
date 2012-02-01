@@ -1,3 +1,4 @@
+#coding: UTF-8
 class MemosController < ApplicationController
   # GET /memos
   def index
@@ -43,6 +44,10 @@ class MemosController < ApplicationController
       @memo.flag = params[:flag]
     else
       @memo = Memo.new(name: @twitter.screen_name, note: params[:note], author_screen_name: session[:screen_name], twitter_user_id: @twitter.id, flag: params[:flag], author: session[:twitter_id])
+    end
+
+    if params[:post].to_i == 1
+      # twitter_client.update(".@#{@twitter.screen_name} さんに関するメモを追加しました #{user_url(:screen_name => @twitter.screen_name)}")
     end
 
     respond_to do |format|

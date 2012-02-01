@@ -1,22 +1,19 @@
-  <div class="span5 sidebar">
+  <div class="span4 sidebar">
     <div class="well">
       <% if current_user -%>
-      <div class="page-header">
+      <div class="page-header" style="margin:0px 0;margin-bottom:10px;">
         <h3><img src='<%= current_user.img %>'> <%= link_to current_user.name, user_path(screen_name: current_user.nickname) %></h3>
-        <span class="label warning"><%= link_to "#{memoed_count}メモ", root_path %></span>
-        <span class="label warning"><%= link_to "#{memo_count}メモされ",user_path(screen_name: current_user.nickname) %></span>
+        <span class="label label-warning"><%= link_to "#{memoed_count}メモ", root_path %></span>
+        <span class="label label-warning"><%= link_to "#{memo_count}メモされ",user_path(screen_name: current_user.nickname) %></span>
       </div>
 
-      <div id="list">
-        <ul>
-          <li id="openmodal" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true"><a href="">新規作成</a></li>
-          <li><%= link_to "フォロー", following_path %></li>
-          <li><%= link_to "メモ一覧", root_path %></li>
-          <li><%= link_to "メモされ一覧", user_path(screen_name: current_user.nickname) %></li>
-        </ul>
-      </div>
-
-      <p class="pull-right top"><a href="#top">Topへ</a></p>
+      <ul class="nav nav-list">  
+        <li><%= link_to "HOME", root_path %></li>
+        <li><a id="open" data-toggle="modal" href="#myModal">新規メモ</a></li>
+        <li><%= link_to "フォローから選択", following_path %></li>
+        <li><%= link_to "自分の評価", user_path(screen_name: current_user.nickname) %></li>
+      </ul>
+      <p class="pull-right top"><a href="#top"><i class="icon-arrow-up"></i>Top</a></p>
     </div>
   </div>
 <% end -%>

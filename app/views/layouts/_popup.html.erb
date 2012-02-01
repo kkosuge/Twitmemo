@@ -1,26 +1,26 @@
 <div id="my-modal" class="modal hide">
 	<div class="modal-header">
-     <a href="#" class="close">&times;</a>
-      <span id="twitter_icon" style="float:left;"></span>
-
-      <div class="input-prepend" style="margin-left:6.5em;height:3.5em;padding-top:1em;">
+     <a href="#" class="close" data-dismiss="modal">&times;</a>
+      <span id="twitter_icon" style="float:left;margin-left:20px;"></span>
+      <div class="input-prepend" style="margin-left:8em;height:3em;padding-top:1em;">
       	<span class="add-on">@</span>
-         <input type="text" maxlength="15" id="input_screen_name" class="span6" style="ime-mode:inactive" placeholder="SCREEN NAME"/>
-         <span class="help-block">Enter screen name and show icon...</span>
-     	</div>
+         <input type="text" maxlength="15" id="input_screen_name" class="span4" style="ime-mode:inactive" placeholder="SCREEN NAME"/>
+      	</div>
   </div>
 
   <div class="modal-body" style="height:9em">
-    <textarea id="input_note_area" raws="5" style="width: 520px; height:7em; margin-bottom:5px;" placeholder="MEMO"></textarea>
+    <textarea id="input_note_area" raws="5" style="width: 520px; height:7em; margin-bottom:5px;" placeholder="Followした理由を書いてください…"></textarea>
   <span id="charactersLeft" style="float:right; font-size: 17px;">200</span>
   </div>
 
   <div class="modal-footer">
-      <label style="width:6em;">
-        <input type="checkbox" name="private" id="private" checked="checked"/>
-        <span>Private</span>
+      <label  class="checkbox">
+        <input type="checkbox" name="private" id="private"/><i class="icon-lock"></i> 非公開
+      </label>
+      <label  class="checkbox">
+        <input type="checkbox" name="twitter" id="twitter"/><i class="icon-comment"></i> Twitterに投稿
       </label>
 
-      <button id="send" data-loading-text="Sending..." class="btn primary loading" disabled="TRUE">Memo</button>
+      <button id="send" data-loading-text="Sending..." class="btn btn-primary loading" disabled="TRUE">Memo</button>
   </div>
 </div>

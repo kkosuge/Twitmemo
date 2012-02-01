@@ -17,7 +17,8 @@
       });
 
   function editassist(){
-    $(".newmemo").click(function(){
+  $(".newmemo").click(function(){
+      $('#my-modal').modal('show');
       setTimeout(function(){
         document.getElementById("input_note_area").focus();
       }, 0);
@@ -50,14 +51,13 @@
               "<a target='_blank' href='https://twitter.com/"+ data[i].screen_name +"'>"+ "<strong class='screen_name'>@" + data[i].screen_name + "</a></strong><br/>" +
               "<strong>" + data[i].name + "</strong></div>" +
             "<div align='right'>" +
-              "<span class='label'>Following</span><a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/following'><strong> "+ data[i].friends_count + "</strong></a>" +
-              "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong> " + data[i].followers_count + "</strong></a></div>"+
+              "<span class='label'>Following</span> <a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/following'><strong>"+ data[i].friends_count + "</strong></a>" +
+              "<span class='label' style='margin-left :1em'>Followers</span> <a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong>" + data[i].followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
-              "<span class='label success'>Profile</span><br/><p style='style='word-break:break-all; margin-top: 5px;'>"+ data[i].description + "</p>"+
-              "<span class='label warning'>Memo</span><br/><p style='word-break:break-all; margin-top:5px;' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</p>"+
-            "<div class='page-header' style='margin-top: -30px;'></div>" +
+              "<span class='label label-success'>Profile</span><br/><p style='style='word-break:break-all;margin-top:5px;'>"+ data[i].description + "</p>"+
+              "<span class='label label-warning'>Memo</span><br/><p style='word-break:break-all;<D-r>' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</p>"+
             "<div align='right' style='margin: -10px -5px -15px -10px;'>" +
-              "<p class='btn primary newmemo' data-controls-modal='my-modal' data-backdrop='static'>Memo</p></div>" + "</div>"); }
+              "<p class='btn btn-primary newmemo' data-controls-modal='my-modal' data-backdrop='static'>Memo</p></div>" + "</div>"); }
       loadingflag=0;
       $('#getjson .loading').remove();
       editassist();
@@ -67,6 +67,6 @@
 </script> 
 
 <div class="row">
-  <div class="span9">
+  <div class="span6">
       <div id="getjson"></div>
   </div>

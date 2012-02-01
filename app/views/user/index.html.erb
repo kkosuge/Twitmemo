@@ -3,10 +3,10 @@
     $(".headerarea").append("<h2>User Info</h2>");
     $("body").css("min-height",screen.height);
     var screen_name = "<%= params[:screen_name] %>";
-    $(".about_memo").prepend(screen_name);
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
     var img;
     $.getJSON(api_url, function(json,status){
+      $(".about_memo").prepend(json.name);
       img = json.profile_image_url;
       $("body").css("background-color","#"+json.profile_background_color);
       $("body").css("background-image", "url("+ json.profile_background_image_url + ")");
@@ -21,7 +21,7 @@
               "<span class='label'>Following</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/following'><strong> "+ json.friends_count + "</strong></a>" +
               "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/followers'><strong> " + json.followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
-              "<span class='label success'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
+              "<span class='label label-info'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
     });
     $("#openmodal").click(function(){
       $("input#input_screen_name").val(screen_name); 
@@ -31,33 +31,33 @@
 </script>
 
 <div class="row">		  
-	<div class="span9">
+	<div class="span6">
 		<div class="well">
 			<div id="prof_info"></div>
        </div>
 
-       <h3 class="about_memo">に関するメモ <small>※公開設定のメモのみ表示</small></h3>
+       <h3 class="about_memo">さんに関するメモ <small>※公開設定のみ</small></h3>
           <% if @memos.present? -%>
             <% @memos.each do |memo| %>
-              <div class='<%= memo.name %> article' style="margin-top:20px;">
+              <div class='article' style="margin-top:10px;">
                 <div style='float:left;'>
                   <a target='_blank' href='https://twitter.com/<%= memo.author_screen_name %>'><img height="48px" width="48px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"></a>
               </div>
 
-              <div style='float:left; margin-left:1em; margin-top:-10px;'>
+              <div style='float:left; margin-left:1em; margin-top:-5px;'>
                 <h4><%= link_to memo.author_screen_name, user_path(screen_name: memo.author_screen_name) %></h4>
-                <p><%= memo.note %></p>
+                <p style="margin-top:5px;"><%= memo.note %></p>
               </div>    
 
               <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             </div>
           <% end %>
       <% else -%>
-        <h4>まだこのユーザーに関するメモがありません｡</h4>
+        <h4>まだこのユーザーに関するメモがありません｡</h4><br/>
         <% if current_user -%>
-          <p id="openmodal" class="btn info" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true">Memo</p>
+          <p id="openmodal" class="btn btn-info" data-controls-modal="my-modal" data-backdrop="true" data-keyboard="true">Memo</p>
         <% else -%>
-          <p><%= link_to 'Sign in', '/auth/twitter' ,:class=>"btn info" %><p>
+          <p><%= link_to 'Sign in', '/auth/twitter' ,:class=>"btn btn-info" %><p>
         <% end -%>
       <% end -%>
     </div>

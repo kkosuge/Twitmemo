@@ -10,26 +10,21 @@
 	   direction: "left"
     });
   });
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
 </script>
 
-  <div class="hero-unit" style="height:135px">
-    <div style="float:left; width:440px; margin-top:-30px">
+  <div class="hero-unit" style="height:160px">
+    <div style="float:left; width:440px; margin-top:-30px; margin-left:-30px;">
       <h1>Twitmemo</h1>
-      <p>｢Twitmemo｣はあなたとTwitterユーザーの出会いを記録するサービスです｡フォローした理由､第一印象を忘れる前にメモ｡毎日の出会いを記録します｡</p>
-      <p><%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn primary large"%></p>
+      <p>｢Twitmemo｣はあなたとTwitterユーザーの出会いを記録するサービスです｡<br/>フォローした理由､第一印象を忘れる前にメモ｡毎日の出会いを記録します｡</p>
+      <%= link_to "Sign in with Twitter", 'auth/twitter' ,class:"btn btn-large btn-primary"%>
     </div>
-    <div style="float:left; margin-left:40px; margin-top:-45px">
+    <div style="float:left; margin-left:30px; margin-top:-40px">
       <%= image_tag "logo.png", width: "220px",height:"220px"; %>
     </div>
   </div>
 
-  <div style="width: 820px; height: 170px;">
-    <div class="span14" style="margin-top:-10px;">
+  <div>
+    <div style="width: 780px;">
       <div style="float:left;width:50%">
         <h3>最近のユーザー</h3>
         <% if @users.present? -%>
@@ -53,17 +48,17 @@
               <% end %>
             </div>
 
-            <div style='width:250px; float:left; margin-left:1em; margin-top:-10px;'>
-              <h4 id="screen_name"><%= link_to memo.name,user_path(screen_name: memo.name) %></h4>
+            <div style='width:250px; float:left; margin-left:1em;'>
+              <h3 id="screen_name"><%= link_to memo.name,user_path(screen_name: memo.name) %></h3>
               <div style="height:35px; overflow:hidden;">
                 <span style="word-break:break-all;"><%= memo.note %></span>
               </div>
             </div>    
 
-            <div align="right" style='margin-top:-7px; margin-right:5px;'>
-              <p>noted by <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %></p>
+            <div align="right" style='margin-right:5px;'>
+              <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %>
             </div>
-            <div class="page-header underline" style="margin-right:5px;margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
+            <div class="page-header underline" style="margin-right:5px;margin-top:-50px;margin-bottom:10px; padding: 0px 0px 0px 0px; clear:both;"></div>
           <% end %>
         <% else -%>
           <strong>メモはありません｡</strong>
@@ -72,19 +67,15 @@
       </div>
     </div>
 
-    <div id="slider" style="width: 820px; height: 170px;">
-    <div class="span11" style="margin-left:100px; margin-top:10px;">
-      <div style="float:left;margin-right:30px"><%= image_tag "note.png", width: "120px", height: "120px";  %></div>
-      <div style="margin-top:-10px; margin-left:160px">
-        <h3>What is Twitmemo?</h3>
-        <p>あの人をフォローした理由が思い出せない時､ありませんか？ そんな時はTwitmemoを使ってフォローした理由をメモしておきましょう｡自分がどう評価されているかチェックすることもできます｡設定を非公開にすればあなた専用のメモスペースとしてご利用頂けます｡</p>
-       </div>
-     </div>
+    <div id="slider" style="width: 780px; height:150px;margin-top:20px;">
+      <div class="span7" style="margin-left:110px;">
+        <div style="float:left;margin-right:30px"><%= image_tag "note.png", width: "120px", height: "120px";  %></div>
+          <h3>What is Twitmemo?</h3>
+          <p>あの人をフォローした理由が思い出せない時､ありませんか？ そんな時はTwitmemoを使ってユーザーへのメモを残しましょう｡自分がどう評価されているかチェックすることもできます｡非公開にすればあなた専用のメモスペースとしてご利用頂けます｡</p>
+      </div>
 
-    <div class="span11" style="margin-left:100px; margin-top:10px;">
-      <div style="float:left; margin-top:-10px"><%= image_tag "twitter.png", width: "120px", height: "120px"; %></div>
-      <div style="margin-top:-10px; margin-left:160px">
-        <h3>How to use?</h3>
-        <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウント情報を利用してすぐにサービスを開始できます｡インターネット上での出会いを記録しましょう｡</p>
-       </div>
-     </div>
+      <div class="span7" style="margin-left:120px">
+        <div style="float:left; margin-right:20px;"><%= image_tag "twitter.png", width: "120px", height: "120px"; %></div>
+          <h3>How to use?</h3>
+          <p>メールアドレスやパスワードなど､面倒なアカウント登録は一切必要ありません｡中央もしくは右上の｢Sign in with Twitter｣ボタンを押すだけ｡Twitterアカウント情報を利用してすぐにサービスを開始できます｡インターネット上での出会いを記録しましょう｡</p>
+      </div>
