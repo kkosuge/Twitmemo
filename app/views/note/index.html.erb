@@ -13,8 +13,12 @@
         } 
         catch(e){ alert(e); } 
         finally { num ++; }
-        }
-      });
+      }
+    });
+
+  function escapehtml (val) {
+    return $("<div/>").text(val).html();
+  };
 
   function editassist(){
   $(".newmemo").click(function(){
@@ -39,7 +43,7 @@
     $.getJSON("api/following/"+ num, function(data){
       for(var i in data) {
         if (data[i].note){
-          note = data[i].note;
+          note = escapehtml(data[i].note);
         } else {
           note= "メモがありません";
         }
@@ -55,7 +59,7 @@
               "<span class='label' style='margin-left :1em'>Followers</span> <a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong>" + data[i].followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
               "<span class='label label-success'>Profile</span><br/><p style='style='word-break:break-all;margin-top:5px;'>"+ data[i].description + "</p>"+
-              "<span class='label label-warning'>Memo</span><br/><p style='word-break:break-all;<D-r>' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</p>"+
+              "<span class='label label-warning'>Memo</span><br/><p style='word-break:break-all;' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</p>"+
             "<div align='right' style='margin: -10px -5px -15px -10px;'>" +
               "<p class='btn btn-primary newmemo'>Memo</p></div>" + "</div>"); }
       loadingflag=0;

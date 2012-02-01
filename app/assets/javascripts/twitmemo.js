@@ -55,17 +55,22 @@ $(document).ready(function(){
     closeRight: 0
   });
 
+  function escapehtml (val) {
+    return $("<div/>").text(val).html();
+  };
+
   /* post */
   $("#send").click(function(){
     $(this).button('loading');
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
+    console.log(note);
     var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
     var post = 0; if ($('#twitter').is(':checked') == true) { post = 1; }
     if (flag==1){
-      label = "<span class='label warning status'>Public</span>"
+      label = "<span class='label label-warning status'>Public</span>"
     } else {
-      label = "<span class='label notice status'>Private</span>"
+      label = "<span class='label label-notice status'>Private</span>"
     }
     $.getJSON("https://api.twitter.com/1/users/show.json?screen_name="+ name +"&callback=?", function(json,status){
       $.ajax({
@@ -86,20 +91,22 @@ $(document).ready(function(){
           if ($('.'+ name +'memoarea').length) {  
             $('.'+ name +'memoarea').html("");
             $('.'+ name +'memoarea').html(note);
-          }  
+          } 
+          note = escapehtml(note);
           $(".memo_area").prepend(
-            "<div class='" + name +" article'>"+
-              "<div style='float:left;'>"+
-                "<a target='_blank' href='https://twitter.com/" + name +"'><img height='48px' width='48px' src='http://img.tweetimag.es/i/"+ name +"'></a>" +
-              "</div>"+
-              "<div style='float:left; margin-left:1em; margin-top:-10px;'>"+
-                "<h4 id='screen_name'><a href='/user/" + name + "'>"+ name +"</a> "+ label + "</h4>"+
-                "<p>"+ note +"</p>"+
-              "</div>"+
-              "<div align='right' style='margin-top:-7px;'>"+
-                "<p class='btn small default editmemo editarea' data-note='"+ note +"' data-name='"+ name +"' data-img='http://img.tweetimag.es/i/"+ name +"' data-controls-modal='my-modal' data-backdrop='true' data-keyboard='true' style='visibility:hidden;'>Edit</p> <span class='editarea' style='visibility:hidden;'><a href='/memos/"+ res.id +"' class='btn small danger' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span>" +
-              "</div>"+
-              "<div class='page-header underline' style='margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;'></div>"+"</div>"); 
+          "<div class='" + name + " article'>" +
+            "<div style='float:left;'>"+
+              "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+json.profile_image_url+ "'></a>"+
+            "</div>" +
+            "<div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>" +
+              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+name +"</a> "+ label +"</h4>"+
+              "<p style='margin-top:5px; word-break: break-all;'>"+ note +"</p>"+
+            "</div>"+    
+            "<div style='float:right;margin-top:-45px'>" +
+              "<span class='editmemo editarea' data-id='"+res.id+"' data-note='"+note+"' data-name='"+name+"' data-img='"+json.profile_img_url+"' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>"+
+              "<span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id +"' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>"+
+            "<div class='page-header underline' style='margin-right:5px;margin-top:-20px;margin-bottom:10px; padding: 0px 0px 0px 0px; clear:both;'></div>"+
+            "</div></div>"); 
               $(".article").hover(
                 function () {
                   $(this).find(".editarea").css("visibility","visible");
@@ -149,7 +156,7 @@ $(document).ready(function(){
     $("#send").button('reset');
   }
 
-  /* scroll */
+  /* to top */
   $("a[href^=#]").click(function(){
     var Hash = $(this.hash);
 	 var HashOffset = $(Hash).offset().top;
@@ -158,5 +165,4 @@ $(document).ready(function(){
 		}, 500);
 	 return false;
 	});
-  
 });
