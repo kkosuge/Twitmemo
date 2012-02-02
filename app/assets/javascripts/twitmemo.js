@@ -1,5 +1,18 @@
 $(document).ready(function(){
-  /* open */
+  /* escape method */
+  function escapehtml(val){
+    return $("<div/>").text(val).html();
+  };
+
+  /* reset */
+  function reset(){
+    $('#my-modal').modal('hide');
+    $("input#input_screen_name").val("");
+    $("#twitter_icon").empty();
+    $("#input_note_area").val("");
+    $("#send").button('reset');
+  }
+
   $("#open").click(function(){
     $('#my-modal').modal('show');
     setTimeout(function(){
@@ -55,11 +68,6 @@ $(document).ready(function(){
     closeChar: 'x',
     closeRight: 0
   });
-
-  /* escape method */
-  function escapehtml (val) {
-    return $("<div/>").text(val).html();
-  };
 
   /* post */
   $("#send").click(function(){
@@ -175,15 +183,6 @@ $(document).ready(function(){
       reset();
       return false;
   });
-
-  /* reset */
-  function reset(){
-    $('#my-modal').modal('hide');
-    $("input#input_screen_name").val("");
-    $("#twitter_icon").empty();
-    $("#input_note_area").val("");
-    $("#send").button('reset');
-  }
 
   /* to top */
   $("a[href^=#]").click(function(){
