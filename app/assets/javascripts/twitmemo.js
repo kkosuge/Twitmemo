@@ -86,7 +86,7 @@ $(document).ready(function(){
       $.ajax({
         type: "POST", url: "/api/post.json", data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag + "&post=" + post,
         success: function(res){
-          note = escapehtml(note);
+          note = escapehtml(note).replace(/\r\n|\r|\n/g,'<br />');
           $.meow({
             message: "Success!"
           });

@@ -41,7 +41,7 @@
     $.getJSON("api/following/"+ num, function(data){
       for(var i in data) {
         if (data[i].note){
-          note = escapehtml(data[i].note);
+          note = escapehtml(data[i].note).replace(/\r\n|\r|\n/g,'<br />');
         } else {
           note= "メモがありません";
         }
