@@ -6,8 +6,8 @@
     var api_url = "https://api.twitter.com/1/users/show.json?screen_name=" + screen_name + "&callback=?";
     var img;
     $.getJSON(api_url, function(json,status){
-      $(".about_memo").prepend(json.name);
       img = json.profile_image_url;
+      $(".about_memo").prepend(json.name);
       $("body").css("background-color","#"+json.profile_background_color);
       if (json.profile_use_background_image){
         $("body").css("background-image", "url("+ json.profile_background_image_url + ")");
@@ -17,28 +17,20 @@
       if (!json.profile_background_tile){ $("body").css("background-repeat","no-repeat"); }
       $("#prof_info").append(
              "<div style= 'float:left;'>" +
-              "<a target='_blank' href='https://twitter.com/"+ screen_name +"'><img src='"+ json.profile_image_url + "'></a></div>" +
+              "<a target='_blank' href='https://twitter.com/" + screen_name + "'><img src='" + json.profile_image_url + "'></a></div>" +
             "<div style= 'float:left; margin-left:1em;'>" +
-              "<a target='_blank' href='https://twitter.com/"+ screen_name +"'>"+ "<strong class='screen_name'>@" + screen_name + "</a></strong><br/>" +
+              "<a target='_blank' href='https://twitter.com/"+ screen_name +"'><strong class='screen_name'>@" + screen_name + "</a></strong><br/>" +
               "<strong>" + json.name + "</strong></div>" +
             "<div align='right'>" +
               "<span class='label'>Following</span> <a target='_blank' href='https://twitter.com/"+ screen_name + "/following'><strong>"+ json.friends_count + "</strong></a>" +
               "<span class='label' style='margin-left :1em'>Followers</span> <a target='_blank' href='https://twitter.com/"+ screen_name + "/followers'><strong>" + json.followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
-              "<span class='label label-success'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
+            "<span class='label label-success'>Profile</span><br/><p style='margin-top:5px;'>" + json.description + "</p>");
     });
     $("#openmodal").click(function(){
       $("input#input_screen_name").val(screen_name); 
-      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));      
+      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
     });
-    $(".article").hover(
-      function () {
-        $(this).find(".editarea").css("visibility","visible");
-      },
-      function () {
-        $(this).find(".editarea").css("visibility","hidden");
-      }
-    );
   });
 </script>
 
@@ -73,3 +65,10 @@
         <% end -%>
       <% end -%>
     </div>
+    <% unless current_user -%>
+      <div class="span4">
+        <div class="alert alert-error">
+          <strong><a href="/auth/twitter">ログインしていません</a></strong>
+        </div>
+      </div>
+    <% end -%>

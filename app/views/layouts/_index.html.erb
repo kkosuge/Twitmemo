@@ -23,47 +23,44 @@
     </div>
   </div>
 
-  <div>
-    <div style="width: 780px;">
-      <div style="float:left;width:50%">
-        <h3>新着ユーザー</h3>
+  <div style="width: 780px;">
+    <div style="float:left;width:50%">
+      <h3>新着ユーザー</h3>
         <% if @users.present? -%>
           <% @users.each do |user| %>
             <%= link_to user_path(screen_name: user.nickname) do %>
-              <img src='<%= user.img %>' width="48px" height="48px">
-            <% end %>
+            <img src='<%= user.img %>' width="48px" height="48px">
           <% end %>
-        <% else -%>
-          <strong>新着ユーザーはいません｡</strong>
-        <% end -%>
-      </div>
+        <% end %>
+      <% else -%>
+        <strong>新着ユーザーはいません｡</strong>
+      <% end -%>
+    </div>
 
-      <div style="float:left;width:50%">
-        <h3>新着メモ</h3>
-        <% if @recentmemos.present? -%>
-          <% @recentmemos.each do |memo| %>
-            <div style='float:left;'>
-              <%= link_to user_path(screen_name: memo.name) do %>
-                <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>">
-              <% end %>
-            </div>
-            <div style='width:250px; float:left; margin-left:1em;margin-top:-9px;'>
-              <h3><%= link_to memo.name,user_path(screen_name: memo.name) %></h3>
+    <div style="float:left;width:50%">
+      <h3>新着メモ</h3>
+      <% if @recentmemos.present? -%>
+        <% @recentmemos.each do |memo| %>
+          <div style='float:left;'>
+            <%= link_to user_path(screen_name: memo.name) do %>
+              <img height="48px" width="48px" src="<%= memo.twitter_user.img_url %>">
+            <% end %>
+          </div>
+          <div style='width:250px; float:left; margin-left:1em;margin-top:-9px;'>
+            <h3><%= link_to memo.name,user_path(screen_name: memo.name) %></h3>
               <div style="height:35px; overflow:hidden;margin-bottom:4px;">
                 <span style="word-break:break-all;"><%= memo.note %></span>
               </div>
-            </div>    
+          </div>    
 
-            <div align="right" style='margin-right:5px;'>
-              <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %>
-            </div>
-            <div class="page-header underline" style="margin-right:5px;margin-bottom:10px; padding:0px; clear:both;"></div>
-          <% end %>
-        <% else -%>
-          <strong>新着メモはありません｡</strong>
-        <% end -%>
-        </div>
-      </div>
+          <div align="right" style='margin-right:5px;'>
+            <%= link_to user_path(screen_name: memo.author_screen_name) do %><img height="24px" width="24px" src="http://img.tweetimag.es/i/<%= memo.author_screen_name %>"><% end %>
+          </div>
+          <div class="page-header underline" style="margin-right:5px;margin-bottom:10px; padding:0px; clear:both;"></div>
+        <% end %>
+      <% else -%>
+        <strong>新着メモはありません｡</strong>
+      <% end -%>
     </div>
 
     <div id="slider" style="width: 780px; height:170px;">

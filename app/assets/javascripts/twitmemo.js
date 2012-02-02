@@ -1,18 +1,6 @@
 $(document).ready(function(){
-  /* escape html */
-  function escapehtml(val){
-    return $("<div/>").text(val).html();
-  };
-
-  /* reset */
-  function reset(){
-    $('#my-modal').modal('hide');
-    $("input#input_screen_name").val("");
-    $("#twitter_icon").empty();
-    $("#input_note_area").val("");
-    $("#send").button('reset');
-  }
-
+  editmemoclick();
+  
   /* stickyscroll */
   $('.sidebar').containedStickyScroll({
     duration: 200,
@@ -45,7 +33,6 @@ $(document).ready(function(){
     setTimeout(function(){
       $("#twitter_icon").html($("<img/>",{ src:"http://img.tweetimag.es/i/"+$("#input_screen_name").val(), style:"width:4em;height:4em;" }));
     },1000);
-
     setTimeout(function() {
       var memo_url = "/api/memos/"+$("#input_screen_name").val();
       $.getJSON(memo_url, function(data){
@@ -54,13 +41,6 @@ $(document).ready(function(){
         }
       });
     },1000);
-
-    if($(this).val().length > 0 && ('#input_note_area').val().length > 0){
-      $('#send').removeClass('disabled').attr('disabled', false);
-    } 
-    else{
-      $('#send').addClass('disabled').attr('disabled', true);
-    }
   });
 
   /* textchange */
@@ -78,19 +58,27 @@ $(document).ready(function(){
     $(this).button('loading');
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
-    var flag = 0; if ($('#private').is(':checked') == false) { flag = 1; }
-    var post = 0; if ($('#twitter').is(':checked') == true) { post = 1; }
-    if (flag==1){ label = "<span class='label label-warning status'>Public</span>"}
-    else { label = "<span class='label label-info status'>Private</span>" }
+    var flag = 0;
+    var post = 0;
+    var label = "<span class='label label-info status'>Private</span>";
+    if ($('#private').is(':checked') == false) {
+      flag = 1;
+      label = "<span class='label label-warning status'>Public</span>";
+    }
+     if ($('#twitter').is(':checked') == true){
+      post = 1;
+    }
     $.getJSON("https://api.twitter.com/1/users/show.json?screen_name="+ name +"&callback=?", function(json,status){
       $.ajax({
-        type: "POST", url: "/api/post.json", data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag + "&post=" + post,
+        type: "POST", 
+        url: "/api/post.json",
+        data: "name="+ name + "&twitter_id=" + json.id + "&note=" + note + "&flag=" + flag + "&post=" + post,
         success: function(res){
+          reset();
           note = escapehtml(note).replace(/\r\n|\r|\n/g,'<br />');
           $.meow({
             message: "Success!"
           });
-          reset();
           if ($(".no_memo").length) {  
             $(".no_memo").remove();
           }  
@@ -103,82 +91,34 @@ $(document).ready(function(){
           } 
           $(".memo_area").prepend(
           "<div class='" + name + " article'>" +
-            "<div style='float:left;'>"+
-              "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+json.profile_image_url+ "'></a></div>" +
+            "<div style='float:left;'>" +
+              "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+ json.profile_image_url + "'></a></div>" +
             "<div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>" +
-              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+ name +"</a> <a href='http://twitter.com/"+name+"'><img src='twi_icon.png' width='13px' height='13px' style='margin-bottom:-1px;' class='opacity'></a></h4>"+
-              "<p style='margin-right:90px;margin-top:5px; word-break: break-all;'>"+ note +"</p></div>"+    
+              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+ name +"</a> <a href='http://twitter.com/"+name+"'><img src='twi_icon.png' width='13px' height='13px' style='margin-bottom:-1px;' class='opacity'></a></h4>" +
+              "<p style='margin-right:90px;margin-top:5px;word-break:break-all;'>"+ note +"</p></div>" +    
             "<div style='float:right;margin-top:-40px'>" +
-              "<span class='editmemo editarea' data-flag='"+flag+"' data-note='"+note+"' data-name='"+name+"' data-img='"+json.profile_image_url+"' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>"+
-              "<span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id +"' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>"+
-            "<div style='float:right;padding-bottom:3px;'>"+label+"</div>"+
-            "<div class='page-header underline' style='margin-bottom:14px;padding:0px;clear:both;'></div>"+
-            "</div></div>" ); 
-              $(".article").hover(
-                function () {
-                  $(this).find(".editarea").css("visibility","visible");
-                },
-                function () {
-                  $(this).find(".editarea").css("visibility","hidden");
-                }
-              );
-
-
-
-
-
-  /* edit */
-  $(".editmemo").click(function(){
-    $('#my-modal').modal(true);
-    var name = $(this).attr("data-name");
-    var note = $(this).attr("data-note");
-    var img = $(this).attr("data-img");
-    var flag = $(this).attr("data-flag");
-    if (flag == 0){ document.getElementById("private").checked = true;}
-    else{document.getElementById("private").checked = false;}
-    $("input#input_screen_name").val(name);
-    $("#input_note_area").val(note);
-    $("#input_note_area").caretPos("last"); 
-    $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
-  });
-
-
-
-
-
-
-
-
-
-
-
-
+              "<span class='editmemo editarea' data-flag='" + flag + "' data-note='" + note + "' data-name='" + name + "' data-img='" + json.profile_image_url + "' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>" +
+              " <span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id + "' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>" +
+            "<div style='float:right;padding-bottom:3px;'>" + label + "</div>" +
+            "<div class='page-header underline' style='margin-bottom:14px;padding:0px;clear:both;'></div></div></div>" ); 
+          $(".article").hover(
+            function () {
+              $(this).find(".editarea").css("visibility","visible");
+            },
+            function () {
+              $(this).find(".editarea").css("visibility","hidden");
+            }
+          );
+          editmemoclick();
         },
         error: function(){
           $.meow({
             message: "Failed!"
           });
-          $("#send").button('reset');
-          $('#my-modal').modal('hide');
+          reset();
         }
     	});
     });
-  });
-
-  /* edit */
-  $(".editmemo").click(function(){
-    $('#my-modal').modal(true);
-    var name = $(this).attr("data-name");
-    var note = $(this).attr("data-note");
-    var img = $(this).attr("data-img");
-    var flag = $(this).attr("data-flag");
-    console.log(flag)
-    if (flag == 0){ document.getElementById("private").checked = true;}
-    else{document.getElementById("private").checked = false;}
-    $("input#input_screen_name").val(name);
-    $("#input_note_area").val(note);
-    $("#input_note_area").caretPos("last"); 
-    $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
   });
 
   /* close modal */
@@ -199,24 +139,18 @@ $(document).ready(function(){
 	});
 });
 
-
-
-
-
+/* caretPos */
 (function($) {
   var caretPos = function(pos) {
     var item = this.get(0);
-
     if (pos == null) {
       return get(item);
     }
-
     if (pos == "first") pos = 0;
     if (pos == "last") pos = this.val().length;
     set(item, pos);
     return this;
   };
-
   var get = function(item) {
     var CaretPos = 0;
     if (document.selection) { // IE
@@ -229,7 +163,6 @@ $(document).ready(function(){
     }
     return (CaretPos);
   };
-
   var set = function(item, pos) {
     if (item.setSelectionRange) {  // Firefox, Chrome
       item.focus();
@@ -242,7 +175,36 @@ $(document).ready(function(){
       range.select();
     }
   };
-
   $.fn.extend({caretPos: caretPos});
-
 })(jQuery);
+
+  /* escape html */
+  function escapehtml(val){
+    return $("<div/>").text(val).html();
+  };
+
+  /* reset */
+  function reset(){
+    $('#my-modal').modal('hide');
+    $("input#input_screen_name").val("");
+    $("#twitter_icon").empty();
+    $("#input_note_area").val("");
+    $("#send").button('reset');
+  }
+
+  /* edit */
+  function editmemoclick(){ 
+    $(".editmemo").click(function(){
+      $('#my-modal').modal(true);
+      var name = $(this).attr("data-name");
+      var note = $(this).attr("data-note");
+      var img = $(this).attr("data-img");
+      var flag = $(this).attr("data-flag");
+      if (flag == 0){ document.getElementById("private").checked = true;}
+      else{ document.getElementById("private").checked = false; }
+      $("input#input_screen_name").val(name);
+      $("#input_note_area").val(note);
+      $("#input_note_area").caretPos("last"); 
+      $("#twitter_icon").html($("<img/>",{ src: img , class:"service-profile-icon", style: "width:4em;height:4em;"}));
+    });
+  }

@@ -8,10 +8,10 @@
     $(window).bind("bottom", function(){
       if (loadingflag == 0){
       try{
-          loadingflag=1;
+          loadingflag = 1;
           appendtext(num);
         } 
-        catch(e){ alert(e); } 
+        catch(e){} 
         finally { num ++; }
       }
     });
@@ -70,17 +70,14 @@
 (function($) {
   var caretPos = function(pos) {
     var item = this.get(0);
-
     if (pos == null) {
       return get(item);
     }
-
     if (pos == "first") pos = 0;
     if (pos == "last") pos = this.val().length;
     set(item, pos);
     return this;
   };
-
   var get = function(item) {
     var CaretPos = 0;
     if (document.selection) { // IE
@@ -93,7 +90,6 @@
     }
     return (CaretPos);
   };
-
   var set = function(item, pos) {
     if (item.setSelectionRange) {  // Firefox, Chrome
       item.focus();
@@ -106,12 +102,9 @@
       range.select();
     }
   };
-
   $.fn.extend({caretPos: caretPos});
-
 })(jQuery);
 </script> 
-
 <div class="row">
   <div class="span6">
       <div id="getjson"></div>
