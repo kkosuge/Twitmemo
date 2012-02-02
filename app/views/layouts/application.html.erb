@@ -20,6 +20,11 @@
       }
       .navi {list-style:none;}
       .navi li {float:left;}
+      .opacity{
+        filter: alpha(opacity=25);
+        -moz-opacity:0.25;
+        opacity:0.25;
+      }
     </style>
   </head>
 
@@ -27,6 +32,11 @@
     <div class = "topbar"><%= render 'layouts/topbar' %></div>
     <div class="container">
       <div class="content">
+        <noscript>
+          <div div class="alert alert-error">
+            <strong>このページはJavascriptをオンにしないと正常に動作しません！</strong>
+          </div>
+        </noscript>
         <% if current_user -%>
           <div class="headerarea"></div> 
           <%= yield %>
