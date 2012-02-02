@@ -18,10 +18,10 @@
               "<a target='_blank' href='https://twitter.com/"+ screen_name +"'>"+ "<strong class='screen_name'>@" + screen_name + "</a></strong><br/>" +
               "<strong>" + json.name + "</strong></div>" +
             "<div align='right'>" +
-              "<span class='label'>Following</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/following'><strong> "+ json.friends_count + "</strong></a>" +
-              "<span class='label' style='margin-left :1em'>Followers</span><a target='_blank' href='https://twitter.com/"+ screen_name + "/followers'><strong> " + json.followers_count + "</strong></a></div>"+
+              "<span class='label'>Following</span> <a target='_blank' href='https://twitter.com/"+ screen_name + "/following'><strong>"+ json.friends_count + "</strong></a>" +
+              "<span class='label' style='margin-left :1em'>Followers</span> <a target='_blank' href='https://twitter.com/"+ screen_name + "/followers'><strong>" + json.followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
-              "<span class='label label-info'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
+              "<span class='label label-success'>Profile</span><br/><p style='margin-top: 5px;'>"+ json.description + "</p>");
     });
     $("#openmodal").click(function(){
       $("input#input_screen_name").val(screen_name); 

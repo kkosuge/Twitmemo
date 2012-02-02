@@ -4,7 +4,7 @@
       <div class="page-header" style="margin:0px 0;margin-bottom:10px;">
         <h3><img src='<%= current_user.img %>'> <%= link_to current_user.name, user_path(screen_name: current_user.nickname) %></h3>
         <span class="label label-warning"><%= link_to "#{memoed_count}メモ", root_path %></span>
-        <span class="label label-warning"><%= link_to "#{memo_count}メモされ",user_path(screen_name: current_user.nickname) %></span>
+        <span class="label label-warning"><%= link_to "#{memo_count}メモられ",user_path(screen_name: current_user.nickname) %></span>
       </div>
 
       <ul class="nav nav-list">  
