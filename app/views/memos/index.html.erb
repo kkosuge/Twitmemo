@@ -29,8 +29,8 @@
             </div>
 
             <div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>
-              <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %> <a href="http://twitter.com/<%= memo.name %>"><img src="twi_icon.png" width="13px" height="13px" style="margin-bottom:-1px;" class="opacity"></a></h4>
-              <p style="margin-top:5px; word-break: break-all;"><%= memo.note %></p>
+              <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %> <a target="blank" href="http://twitter.com/<%= memo.name %>"><img src="twi_icon.png" width="13px" height="13px" style="margin-bottom:-1px;" class="opacity"></a></h4>
+              <p style="margin-right:90px;margin-top:5px;word-break:break-all;"><%= memo.note %></p>
             </div>    
 
             <div style="float:right;margin-top:-40px">

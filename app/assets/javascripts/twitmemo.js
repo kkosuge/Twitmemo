@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  /* escape method */
+  /* escape html */
   function escapehtml(val){
     return $("<div/>").text(val).html();
   };
@@ -13,6 +13,13 @@ $(document).ready(function(){
     $("#send").button('reset');
   }
 
+  /* stickyscroll */
+  $('.sidebar').containedStickyScroll({
+    duration: 200,
+    closeChar: 'x'
+  });
+
+  /* open modal */
   $("#open").click(function(){
     $('#my-modal').modal('show');
     setTimeout(function(){
@@ -21,22 +28,25 @@ $(document).ready(function(){
   });
 
   /* hidden event */
-  $('#my-modal').on('hidden', function () {
+  $('#my-modal').on('hidden',function(){
     reset();
   })
 
   /* count */
-  $('#input_note_area').bind('textchange', function (event, previousText) {
-    $('#charactersLeft').html( 200 - parseInt($(this).val().length));
+  $('#input_note_area').bind('textchange',function(event,previousText){
+    $('#charactersLeft').html(200 - parseInt($(this).val().length));
+    if(parseInt($(this).val().length) > 200){
+      $('#charactersLeft').css('color', "red");
+    }
   });
 
   /* textchange */
-  $('#input_screen_name').bind('textchange', function () {
-    var getimg = setTimeout(function() {
-      $("#twitter_icon").html($("<img/>",{ src: "http://img.tweetimag.es/i/"+$("#input_screen_name").val() , class:"service-profile-icon", style: "width:4em;height:4em;" }));
+  $('#input_screen_name').bind('textchange',function(){
+    setTimeout(function(){
+      $("#twitter_icon").html($("<img/>",{ src:"http://img.tweetimag.es/i/"+$("#input_screen_name").val(), style:"width:4em;height:4em;" }));
     },1000);
 
-    var getmemo = setTimeout(function() {
+    setTimeout(function() {
       var memo_url = "/api/memos/"+$("#input_screen_name").val();
       $.getJSON(memo_url, function(data){
         for(var i in data) {
@@ -45,28 +55,22 @@ $(document).ready(function(){
       });
     },1000);
 
-    if ($(this).val().length > 0 && ('#input_note_area').val().length > 0){
+    if($(this).val().length > 0 && ('#input_note_area').val().length > 0){
       $('#send').removeClass('disabled').attr('disabled', false);
-    }
+    } 
     else{
       $('#send').addClass('disabled').attr('disabled', true);
     }
   });
 
+  /* textchange */
   $('#input_note_area').bind('textchange', function () {
-    if ($(this).val().length > 0){
+    if ($(this).val().length > 0 && $(this).val().length <= 200){
       $('#send').removeClass('disabled').attr('disabled', false);
     }
     else{
       $('#send').addClass('disabled').attr('disabled', true);
     }
-  });
-
-  /* stickyscroll */
-  $('.sidebar').containedStickyScroll({
-    duration: 200,
-    closeChar: 'x',
-    closeRight: 0
   });
 
   /* post */
@@ -103,7 +107,7 @@ $(document).ready(function(){
               "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+json.profile_image_url+ "'></a></div>" +
             "<div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>" +
               "<h4 id='screen_name'><a href='/user/"+ name +"'>"+name +"</a> <a href='http://twitter.com/"+name+"'><img src='twi_icon.png' width='13px' height='13px' style='margin-bottom:-1px;' class='opacity'></a></h4>"+
-              "<p style='margin-top:5px; word-break: break-all;'>"+ note +"</p></div>"+    
+              "<p style='margin-right:90px;margin-top:5px; word-break: break-all;'>"+ note +"</p></div>"+    
             "<div style='float:right;margin-top:-40px'>" +
               "<span class='editmemo editarea' data-flag='"+flag+"' data-note='"+note+"' data-name='"+name+"' data-img='"+json.profile_image_url+"' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>"+
               "<span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id +"' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>"+
