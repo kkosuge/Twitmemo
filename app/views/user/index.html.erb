@@ -60,20 +60,16 @@
                 <h4><%= link_to memo.author_screen_name, user_path(screen_name: memo.author_screen_name) %></h4>
                 <p style="margin-top:5px;"><%= memo.note %></p>
               </div>   
-
-              <div style="float:right;">
-                <span class="editarea" style="visibility:hidden;"><i class="icon-trash"></i><%= link_to 'Delete', memo, confirm: 'メモを削除しますか?', method: :delete, remote: true %></span>
-              </div>
-
+<D-r>
               <div class="page-header underline" style="margin-bottom:20px; padding: 5px 0px 0px 0px; clear:both;"></div>
             </div>
           <% end %>
       <% else -%>
         <h4>まだこのユーザーに関するメモがありません｡</h4><br/>
         <% if current_user -%>
-          <p id="openmodal" class="btn btn-primary editmemo">Memo</p>
+          <p id="openmodal" class="btn btn-info editmemo"><i class='icon-edit icon-white'></i> Memo</p>
         <% else -%>
-          <p><%= link_to 'Sign in', '/auth/twitter' ,:class=>"btn btn-primary" %><p>
+          <p><%= link_to 'Sign in', '/auth/twitter' ,:class=>"btn btn-info" %><p>
         <% end -%>
       <% end -%>
     </div>

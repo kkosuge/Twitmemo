@@ -47,7 +47,7 @@ class MemosController < ApplicationController
     end
 
     if params[:post].to_i == 1
-      # twitter_client.update(".@#{@twitter.screen_name} さんに関するメモを追加しました #{user_url(:screen_name => @twitter.screen_name)}")
+      # twitter_client.update(".@#{@twitter.screen_name} さんへのメモを追加! #{user_url(:screen_name => @twitter.screen_name)} #twitmemo")
     end
 
     respond_to do |format|
