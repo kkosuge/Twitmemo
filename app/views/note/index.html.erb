@@ -57,7 +57,7 @@
               "<span class='label' style='margin-left :1em'>Followers</span> <a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/followers'><strong>" + data[i].followers_count + "</strong></a></div>"+
             "<div style='clear:left;'>" +
               "<span class='label label-success'>Profile</span><br/><p style='style='word-break:break-all;margin-top:5px;'>"+ data[i].description + "</p>"+
-              "<span class='label label-warning'>Memo</span><br/><p style='word-break:break-all;' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</p>"+
+              "<div class='alert'><strong style='word-break:break-all;' class='"+ data[i].screen_name +"memoarea memoarea'>"+ note + "</strong></div>"+
             "<div align='right' style='margin: -10px -5px -15px -10px;'>" +
             "<p class='btn btn-info newmemo'><i class='icon-edit icon-white'></i> Memo</p></div></div>"); }
       loadingflag=0;

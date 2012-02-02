@@ -8,10 +8,10 @@
       </div>
 
       <ul class="nav nav-list">  
-        <li><%= link_to "HOME", root_path %></li>
-        <li><a id="open" data-toggle="modal" href="#myModal">新規メモ</a></li>
-        <li><%= link_to "フォローから選択", following_path %></li>
-        <li><%= link_to "自分の評価", user_path(screen_name: current_user.nickname) %></li>
+        <li><%= link_to root_path do %><i class="icon-home"></i> HOME<% end %></li>
+        <li><a id="open" data-toggle="modal" href="#myModal"><i class="icon-edit"></i> 新規メモ</a></li>
+        <li><%= link_to following_path do %><i class="icon-search"></i> フォローから探す<% end %></li>
+        <li><%= link_to user_path(screen_name: current_user.nickname) do %><i class="icon-user"></i> 自分の評価<% end %></li>
       </ul>
       <p class="pull-right top"><a href="#top"><i class="icon-arrow-up"></i>Top</a></p>
     </div>
