@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131103031) do
+ActiveRecord::Schema.define(:version => 20120202095216) do
 
   create_table "memos", :force => true do |t|
     t.text     "note"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20120131103031) do
     t.string   "name"
     t.string   "author_screen_name"
   end
+
+  add_index "memos", ["author"], :name => "index_memos_on_author"
+  add_index "memos", ["name"], :name => "index_memos_on_name"
 
   create_table "twitter_users", :force => true do |t|
     t.integer  "twitter_id"
