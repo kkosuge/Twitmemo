@@ -9,8 +9,12 @@
       $(".about_memo").prepend(json.name);
       img = json.profile_image_url;
       $("body").css("background-color","#"+json.profile_background_color);
-      $("body").css("background-image", "url("+ json.profile_background_image_url + ")");
-      if (!json.profile_background_tile) { $("body").css("background-repeat","no-repeat"); }
+      if (json.profile_use_background_image){
+        $("body").css("background-image", "url("+ json.profile_background_image_url + ")");
+      }else{
+        $("body").css("background-image", "none");
+      }
+      if (!json.profile_background_tile){ $("body").css("background-repeat","no-repeat"); }
       $("#prof_info").append(
              "<div style= 'float:left;'>" +
               "<a target='_blank' href='https://twitter.com/"+ screen_name +"'><img src='"+ json.profile_image_url + "'></a></div>" +
