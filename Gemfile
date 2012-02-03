@@ -7,6 +7,8 @@ gem 'twitter'
 gem 'less-rails-bootstrap'
 gem 'json'
 gem 'kaminari'
+gem 'capistrano'
+gem 'unicorn'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
