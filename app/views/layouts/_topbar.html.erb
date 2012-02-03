@@ -9,7 +9,7 @@
 <div class="container">
   <ul class="navi" style="margin-top:10px;">
     <li style="margin-left:-20px; margin-right:10px;"><h1><%= link_to 'Twitmemo',root_path %></h1></li>
-    <li style="height:20px;margin-top:3px;">
+    <li style="height:20px;margin-top:2px;">
       <% if current_user -%>
         <%= form_tag(root_path, :method => :get, :class => "form-search") do %>
           <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索",:class => "input-medium search-query" %>
