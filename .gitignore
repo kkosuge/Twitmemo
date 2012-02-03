@@ -1,4 +1,5 @@
 assc
+.DS_Store
 .sass-cache
 capybara-*.html
 .rspec

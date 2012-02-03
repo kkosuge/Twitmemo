@@ -15,7 +15,7 @@
           <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索",:class => "input-medium search-query" %>
         <% end -%>
     </li>
-    <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign out', logout_path, %></h4>
+    <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign out', logout_path %></h4>
 
     <% elsif params["controller"] == "memos" && params["action"] == "index" %>
     <div style="float:left; margin-top:6px">
