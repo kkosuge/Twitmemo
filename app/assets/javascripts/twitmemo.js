@@ -153,21 +153,21 @@ $(document).ready(function(){
   };
   var get = function(item) {
     var CaretPos = 0;
-    if (document.selection) { // IE
+    if (document.selection) {
       item.focus ();
       var Sel = document.selection.createRange();
       Sel.moveStart ("character", -item.value.length);
       CaretPos = Sel.text.length;
-    } else if (item.selectionStart || item.selectionStart == "0") { // Firefox, Chrome
+    } else if (item.selectionStart || item.selectionStart == "0") {
       CaretPos = item.selectionStart;
     }
     return (CaretPos);
   };
   var set = function(item, pos) {
-    if (item.setSelectionRange) {  // Firefox, Chrome
+    if (item.setSelectionRange) {
       item.focus();
       item.setSelectionRange(pos, pos);
-    } else if (item.createTextRange) { // IE
+    } else if (item.createTextRange) {
       var range = item.createTextRange();
       range.collapse(true);
       range.moveEnd("character", pos);
