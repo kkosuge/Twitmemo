@@ -263,6 +263,7 @@ DEPENDENCIES
   annotate!
   capistrano
   coffee-rails (~> 3.1.1)
+  execjs
   faker
   heroku
   jquery-rails
@@ -274,6 +275,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.1.4)
   sqlite3
+  therubyracer
   thin
   twitter
   twitter-bootstrap-rails!

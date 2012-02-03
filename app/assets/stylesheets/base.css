@@ -21,7 +21,8 @@ body {
 .page-header {
   margin: 0px 0px;
 }
-footer  {
+#footer  {
+  margin-top: 1em;
   text-align: center;
 }
 .label a { color:#fff;text-decoration:none; }
