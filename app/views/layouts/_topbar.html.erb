@@ -4,7 +4,7 @@
     <li style="height:20px;margin-top:3px;">
       <% if current_user -%>
         <%= form_tag(root_path, :method => :get, :class => "form-search") do %>
-          <%= search_field_tag :keyword ,nil,:placeholder => "検索",:class => "input-medium search-query" %>
+          <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索",:class => "input-medium search-query" %>
         <% end -%>
     </li>
     <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign out', logout_path, %></h4>

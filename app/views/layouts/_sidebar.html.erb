@@ -9,8 +9,8 @@
     <ul class="nav nav-list">  
       <li><%= link_to root_path do %><i class="icon-home"></i> ホーム<% end %></li>
       <li><a id="open" data-toggle="modal" href="#myModal"><i class="icon-edit"></i> 新規メモ</a></li>
-      <li><%= link_to following_path do %><i class="icon-search"></i> フォローから探す<% end %></li>
-      <li><%= link_to user_path(screen_name: current_user.nickname) do %><i class="icon-user"></i> 自分宛<D-r>のメモ<% end %></li>
+      <li><%= link_to following_path do %><i class="icon-search"></i> フォローからメモ<% end %></li>
+      <li><%= link_to user_path(screen_name: current_user.nickname) do %><i class="icon-user"></i> 自分宛のメモ<% end %></li>
     </ul>
     <p class="pull-right top"><a href="#top"><i class="icon-arrow-up"></i>Top</a></p>
   </div>

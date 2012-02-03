@@ -32,8 +32,8 @@ class ApplicationController < ActionController::Base
   def twitter_client
     user = User.find(session[:user_id]) if session[:user_id]
     Twitter.configure do |config|
-      config.consumer_key = '0qzNniUyKkWdGIUe7kMEA'
-      config.consumer_secret = 'czidLzD2WJQgSY5TBd15vBsYNzrj5FzarYOoe1fw'
+      config.consumer_key = 'yUErzm2W0S0mWPGva04gw'
+      config.consumer_secret = 'KyNVtEXmg7RsofNcmla5Hw6lpvxcAQe15jEF4TZE'
       config.oauth_token = user.token
       config.oauth_token_secret = user.secret
     end
