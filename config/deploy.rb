@@ -27,7 +27,7 @@ set :rails_env, "production"
 namespace :deploy do
   desc "START server"
   task :start, :roles=>:app do
-    run "cd #{current_path} && BUNDLE_GEMFILE=#{current_path}/Gemfile bundle exec unicorn_rails -c #{current_path}/config/unicorn.rb -E #{rails_env} -D"
+    run "cd #{current_path} && BUNDLE_GEMFILE=#{current_path}/Gemfile bundle exec unicorn_rails -c #{current_path}/config/unicorn.conf -E #{rails_env} -D"
   end
 
   desc "RESTART server"
