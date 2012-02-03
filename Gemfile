@@ -19,6 +19,8 @@ end
 group :production do
   gem 'thin'
   gem 'mysql2'
+  gem 'execjs'
+  gem 'therubyracer'
 end
 
 group :development, :test do
