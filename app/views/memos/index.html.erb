@@ -40,7 +40,7 @@
             <div style="float:right;padding-bottom:3px;">
               <strong style="color:#808080;font-size:xx-small"><%= memo.updated_at.to_s(:jp) %><%= memo.updated_at.hour + 9 %>:<%= memo.updated_at.min %></strong>
               <% if memo.flag == 1 -%>
-                <span class="label label-warning status">Pubilc</span>
+                <span class="label label-warning status">Public</span>
               <% else -%>
                 <span class="label label-info status">Private</span>
               <% end %>
