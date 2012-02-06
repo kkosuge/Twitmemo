@@ -4,8 +4,13 @@ $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
 set :rvm_ruby_string, '1.9.3'
 
+
+set :bitbucket_user do
+  Capistrano::CLI.ui.ask("Bitbucket User: ")
+end
+
 set :application, "twitmemo"
-set :repository,  "https://kkosuge@bitbucket.org/hotchemi/twitmemo.git"
+set :repository,  "https://#{bitbucket_user}@bitbucket.org/hotchemi/twitmemo.git"
 
 set :scm, :git
 set :branch, 'master'
