@@ -99,7 +99,7 @@ $(document).ready(function(){
             "<div style='float:right;margin-top:-40px'>" +
               "<span class='editmemo editarea' data-flag='" + flag + "' data-note='" + note + "' data-name='" + name + "' data-img='" + json.profile_image_url + "' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>" +
               " <span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id + "' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>" +
-            "<div style='float:right;padding-bottom:3px;'>" + label + "</div>" +
+            "<div style='float:right;padding-bottom:3px;'><strong style='color:#808080;font-size:xx-small'>Now!</strong> "+label+"</div>" +
             "<div class='page-header underline' style='margin-bottom:14px;padding:0px;clear:both;'></div></div></div>" ); 
           $(".article").hover(
             function () {

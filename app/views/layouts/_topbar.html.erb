@@ -7,15 +7,15 @@
   fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="container">
-  <ul class="navi" style="margin-top:10px;">
-    <li style="margin-left:-20px; margin-right:10px;"><h1><%= link_to 'Twitmemo',root_path %></h1></li>
-    <li style="height:20px;margin-top:3px;">
+  <ul class="navi" style="margin-top:13px;">
+    <li style="margin-left:-20px; margin-right:10px;"><h1><%= link_to root_path do %><%= image_tag "twitmemo.png", :width=>"152" %><% end %></h1></li>
+    <li style="height:20px;margin-top:0px;">
       <% if current_user -%>
         <%= form_tag(root_path, :method => :get, :class => "form-search") do %>
           <%= search_field_tag :keyword ,nil,:placeholder => "メモ内検索",:class => "input-medium search-query" %>
         <% end -%>
     </li>
-    <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign out', logout_path %></h4>
+    <h4 class="pull-right" style="margin-top:10px;"><%= link_to 'Sign out', logout_path %></h4>
 
     <% elsif params["controller"] == "memos" && params["action"] == "index" %>
     <div style="float:left; margin-top:6px">
@@ -26,9 +26,9 @@
       </ul>
     </div>
   </ul>
-  <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign in', '/auth/twitter' %></h4>
+  <h4 class="pull-right" style="margin-top:10px;"><%= link_to 'Sign in', '/auth/twitter' %></h4>
   <% else -%>
     </ul>
-    <h4 class="pull-right" style="margin-top:15px;"><%= link_to 'Sign in', '/auth/twitter' %></h4>
+    <h4 class="pull-right" style="margin-top:10px;"><%= link_to 'Sign in', '/auth/twitter' %></h4>
   <% end -%>
 </div>
