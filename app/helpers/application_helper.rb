@@ -5,14 +5,16 @@ module ApplicationHelper
   end
 
   def memo_count
-    @users = User.find(session[:user_id]) 
-    @twitter ||= TwitterUser.find_by_screen_name(@users.nickname)
-    @count = @twitter.memos.count
+    @twitter = Memo.where(name: session[:screen_name])
+    if @twitter.size == 0
+      return 0
+    end
+    @twitter.size
   end
 
   def memoed_count
-    @count = Memo.where(author: session[:twitter_id])
-    @count.count
+    @memo = Memo.where(author: session[:twitter_id])
+    @memo.count
   end
 
   def hbr(str)
