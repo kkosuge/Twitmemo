@@ -1,5 +1,6 @@
 class Memo < ActiveRecord::Base
   belongs_to :twitter_user
+  has_many :favs, :dependent => :delete_all
 
   validates :name,    :presence => true,
                       :length => {:maximum => 15}

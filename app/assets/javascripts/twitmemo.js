@@ -53,8 +53,63 @@ $(document).ready(function(){
     }
   });
 
+  /* fav */
+  $(".fav").click(function(){ 
+    $(this).button('loading');
+    var memo_id = $('#input_screen_name').val();
+      $.ajax({
+        type: "POST", 
+        url: "/api/fav.json",
+        data: "memo_id="+ memo_id,
+        success: function(res){
+          reset();
+          note = escapehtml(note).replace(/\r\n|\r|\n/g,'<br />');
+          $.meow({
+            message: "Success!"
+          });
+          if ($(".no_memo").length) {  
+            $(".no_memo").remove();
+          }  
+          if ($('.' + name).length) {  
+            $('.' + name).remove();
+          }  
+          if ($('.'+ name +'memoarea').length) {  
+            $('.'+ name +'memoarea').html("");
+            $('.'+ name +'memoarea').html(note);
+          }
+          $(".memo_area").prepend(
+          "<div class='" + name + " article'>" +
+            "<div style='float:left;'>" +
+              "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+ json.profile_image_url + "'></a></div>" +
+            "<div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>" +
+              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+ name +"</a><a href='http://twitter.com/"+name+"'><img src='logo.png' width='18px' height='18px' style='margin-left:1px;margin-bottom:-3px;'></a></h4>" +
+              "<p style='margin-right:90px;margin-top:5px;word-break:break-all;'>"+ note +"</p></div>" +    
+            "<div style='float:right;margin-top:-40px'>" +
+              "<span class='editmemo editarea' data-flag='" + flag + "' data-note='" + note + "' data-name='" + name + "' data-img='" + json.profile_image_url + "' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>" +
+              " <span class='editarea' style='visibility:hidden;'><i class='icon-trash'></i><a href='/memos/"+ res.id + "' data-confirm='メモを削除しますか?' data-method='delete' data-remote='true' rel='nofollow'>Delete</a></span></div>" +
+            "<div style='float:right;padding-bottom:3px;'><strong style='color:#808080;font-size:xx-small'>Now!</strong> "+label+"</div>" +
+            "<div class='page-header underline' style='margin-bottom:14px;padding:0px;clear:both;'></div></div></div>" ); 
+          $(".article").hover(
+            function () {
+              $(this).find(".editarea").css("visibility","visible");
+            },
+            function () {
+              $(this).find(".editarea").css("visibility","hidden");
+            }
+          );
+          editmemoclick();
+        },
+        error: function(){
+          $.meow({
+            message: "Failed!"
+          });
+          reset();
+        }
+    	});
+  });
+
   /* post */
-  $("#send").click(function(){
+  $("#send").click(function(){ 
     $(this).button('loading');
     var name = $('#input_screen_name').val();
     var note = $('#input_note_area').val();
