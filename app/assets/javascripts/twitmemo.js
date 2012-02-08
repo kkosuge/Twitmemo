@@ -63,10 +63,10 @@ $(document).ready(function(){
         data: "memo_id="+ memo_id,
         success: function(res){
           if(parents.attr("src").match(/unfav/i)){
-            parents.attr("src","../fav.png");
+            parents.attr("src","/assets/fav.png");
           }
           else{
-            parents.attr("src","../unfav.png");
+            parents.attr("src","/assets/unfav.png");
           }
         },
         error: function(){

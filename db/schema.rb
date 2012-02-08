@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207124355) do
+ActiveRecord::Schema.define(:version => 20120208094020) do
 
   create_table "favs", :force => true do |t|
     t.integer  "memo_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120207124355) do
     t.integer  "twitter_user_id"
     t.string   "name"
     t.string   "author_screen_name"
+    t.integer  "fav_flag"
   end
 
   add_index "memos", ["author"], :name => "index_memos_on_author"

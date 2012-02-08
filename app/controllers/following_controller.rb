@@ -1,6 +1,5 @@
 class FollowingController < ApplicationController
   before_filter :need_oauth, :only => :index
-
   def index
     @datas = getdata(params[:id]) 
     render json: @datas
@@ -35,10 +34,10 @@ class FollowingController < ApplicationController
     userinfo = twitter_users.map{|user| user.id}
     memos = Memo.where("author = ? AND twitter_user_id in (?)", session[:twitter_id], userinfo)  
 
-	 correct.each do |i|
+	  correct.each do |i|
       newdata << Hash[i]
       memos.each do |m|
-		  if i.screen_name == m.name
+		    if i.screen_name == m.name
           newdata[-1]['note'] = m.note
         end
       end

@@ -1,25 +1,11 @@
 <script type="text/javascript"> 
   $(document).ready(function(){
-    $(".headerarea").append("<h2>Memo</h2>");
-    $(".article").hover(
-      function () {
-      $(this).find(".editarea").css("visibility","visible");
-      },
-      function () {
-        $(this).find(".editarea").css("visibility","hidden");
-      }
-    );
+    $(".headerarea").append("<h2>Favorite</h2>");
   }); 
 </script> 
 
 <div class="row">
   <div class="span6">
-    <% if params[:keyword].present? -%>
-      <div class="alert alert-success">
-        <strong><%= "｢#{params[:keyword]}｣の検索結果"%></strong>
-      </div>
-    <% end %>
-
     <div class="memo_area">
       <% if @memos.present? -%> 
         <% @memos.each do |memo| %>
@@ -29,22 +15,12 @@
             </div>
 
             <div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>
-              <p><%= memo.favs[2] %></p>
               <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %><a target="blank" href="http://twitter.com/<%= memo.name %>"><img src="logo.png" width="18px" height="18px" style="margin-left:1px;margin-bottom:-3px;"></a></h4>
               <p style="margin-right:90px;margin-top:5px;word-break:break-all;"><%=hbr memo.note %></p>
             </div>    
 
-            <div style="float:right;margin-top:-45px">
-              <span class='editmemo editarea' data-flag="<%= memo.flag %>" data-note="<%= memo.note %>" data-name="<%= memo.name %>" data-img="<%= memo.twitter_user.img_url %>" style="visibility:hidden;"><i class="icon-edit"></i><a href="#">Edit</a></span>
-              <span class="editarea" style="visibility:hidden;"><i class="icon-trash"></i><%= link_to 'Delete', memo, confirm: 'メモを削除しますか?', method: :delete, remote: true %></span>
-            </div>
-
             <div class="fav" style="float:right;margin-top:-25px" data-id="<%= memo.id %>">
-              <% if memo.fav_flag == 1 -%>
                 <%= image_tag "fav.png",width:"20px",height:"20px"; %>
-              <% else -%>
-                <%= image_tag "unfav.png",width:"20px",height:"20px"; %>
-              <% end %>
             </div>
 
             <div style="float:right;padding-bottom:3px;">
@@ -62,5 +38,4 @@
         <strong class="no_memo">メモがありません</strong>
       <% end %>
     </div>
-    <%= paginate @memos %>
   </div>
