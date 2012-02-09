@@ -22,12 +22,6 @@
 		});
 	};
 })(jQuery);
-// The -is- object is used to identify the browser.  Every browser edition
-// identifies itself, but there is no standard way of doing it, and some of
-// the identification is deceptive. This is because the authors of web
-// browsers are liars. For example, Microsoft's IE browsers claim to be
-// Mozilla 4. Netscape 6 claims to be version 5.
-
 var is = {
     ie:      navigator.appName == 'Microsoft Internet Explorer',
     java:    navigator.javaEnabled(),

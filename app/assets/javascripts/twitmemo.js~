@@ -1,5 +1,7 @@
 $(document).ready(function(){
   editmemoclick();
+  $(this).joyride();
+  
   /* stickyscroll */
   $('.sidebar').containedStickyScroll({
     duration: 200,

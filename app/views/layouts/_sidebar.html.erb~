@@ -1,0 +1,18 @@
+<div class="span4 sidebar">
+  <div class="well">
+    <div class="page-header" style="margin:0px 0;margin-bottom:10px;">
+      <h3><img src='<%= current_user.img %>'> <%= link_to current_user.name, user_path(screen_name: current_user.nickname) %></h3>
+      <span class="label label-warning"><%= link_to "#{memoed_count}メモ", root_path %></span>
+      <span class="label label-warning"><%= link_to "#{memo_count}メモられ",user_path(screen_name: current_user.nickname) %></span>
+    </div>
+
+    <ul class="nav nav-list">  
+      <li id="numero1"><%= link_to root_path do %><i class="icon-home"></i> ホーム<% end %></li>
+      <li id="numero2"><a id="open" data-toggle="modal" href="#myModal"><i class="icon-edit"></i> 新規メモ</a></li>
+      <li id="numero3"><%= link_to following_path do %><i class="icon-search"></i> フォローからメモ<% end %></li>
+      <li><%= link_to fav_path do %><i class="icon-star"></i> お気に入り<% end %></li>
+      <li><%= link_to user_path(screen_name: current_user.nickname) do %><i class="icon-user"></i> マイページ<% end %></li>
+    </ul>
+    <p class="pull-right top"><a href="#top"><i class="icon-arrow-up"></i>Top</a></p>
+  </div>
+</div>
