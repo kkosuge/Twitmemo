@@ -3,15 +3,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_return_to
 
-  # Basic
-  def authenticate
-    if Rails.env.production?
-      authenticate_or_request_with_http_basic do |username, password|
-        username == 'twitmemo' && password == 'twitmemo'
-      end
-    end
-  end
-
   def need_oauth
     unless current_user
       redirect_to root_url

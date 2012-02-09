@@ -29,3 +29,4 @@ body {
 .label a:hover { color:#fff;text-decoration:none; }
 .navi {list-style:none;}
 .navi li {float:left;}
+h1 a:hover {color:#08C;text-decoration:none;}

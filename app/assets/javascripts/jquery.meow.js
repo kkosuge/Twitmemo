@@ -1,6 +1,5 @@
 (function ($) {
   'use strict';
-  // Meow queue
   var meow_area,
     meows = {
       queue: {},
@@ -22,7 +21,6 @@
         return size;
       }
     },
-    // Meow constructor
     Meow = function (options) {
       var that = this,
         message_type;
@@ -37,7 +35,6 @@
           options.beforeCreateFirst.call(that);
         }
       }
-      
       if (typeof options.title === 'string') {
         this.title = options.title;
       }
@@ -49,7 +46,6 @@
           this.title = options.message.attr('title');
         }
       }
-
       switch (message_type) {
       case 'string':
         this.message = options.message;
@@ -65,7 +61,6 @@
         this.message = options.message.text();
         break;
       }
-
       if (typeof options.icon === 'string') {
         this.icon = options.icon;
       }
@@ -74,13 +69,9 @@
       } else {
         this.duration = options.duration || 5000;
       }
-      
-      // Call callback if it's defined (this = meow object)
       if (typeof options.beforeCreate === 'function') {
         options.beforeCreate.call(that);
       }
-
-      // Add the meow to the meow area
       $('#' + meow_area).append($(document.createElement('div'))
         .attr('id', 'meow-' + this.timestamp.toString())
         .addClass('meow')
@@ -89,15 +80,11 @@
         .fadeIn(400));
 
       this.manifest = $('#meow-' + this.timestamp.toString());
-      
-      // Add title if it's defined
       if (typeof this.title === 'string') {
         this.manifest.find('.inner').prepend(
           $(document.createElement('h1')).text(this.title)
         );
       }
-      
-      // Add icon if it's defined
       if (typeof that.icon === 'string') {
         this.manifest.find('.inner').prepend(
           $(document.createElement('div')).addClass('icon').html(
@@ -105,9 +92,6 @@
           )
         );
       }
-      
-      // Add close button if the meow isn't uncloseable
-      // TODO: this close button needs to be much prettier
       if (options.closeable !== false) {
         this.manifest.find('.inner').prepend(
           $(document.createElement('a'))
@@ -120,7 +104,6 @@
             })
         );
       }
-
       this.manifest.bind('mouseenter mouseleave', function (event) {
         if (event.type === 'mouseleave') {
           that.hovered = false;
@@ -134,26 +117,19 @@
           that.manifest.addClass('hover');
         }
       });
-      
-      // Add a timeout if the duration isn't Infinity
       if (this.duration !== Infinity) {
         this.timeout = setTimeout(function () {
-          // Make sure this meow hasn't already been destroyed
           if (typeof meows.get(that.timestamp) !== 'undefined') {
-            // Call callback if it's defined (this = meow DOM element)
             if (typeof options.onTimeout === 'function') {
               options.onTimeout.call(that.manifest);
             }
-            // Don't destroy if user is hovering over meow
             if (that.hovered !== true && typeof that === 'object') {
               that.destroy();
             }
           }
         }, that.duration);
       }
-
       this.destroy = function () {
-        // Call callback if it's defined (this = meow DOM element)
         if (typeof options.beforeDestroy === 'function') {
           options.beforeDestroy.call(that.manifest);
         }
@@ -174,7 +150,6 @@
         });
       };
     };
-
   $.fn.meow = function (args) {
     meows.add(new Meow(args));
   };
