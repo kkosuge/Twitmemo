@@ -37,7 +37,7 @@
   }
 
   function appendtext(num){
-    $("#getjson").append("<div class='loading' align='center'><img src='loading.gif'></div>");
+    $("#getjson").append("<div class='loading' align='center'><img src='/assets/loading.gif'></div>");
     $.getJSON("api/following/"+ num, function(data){
       for(var i in data) {
         if (data[i].note){
@@ -50,7 +50,7 @@
             "<div style= 'float:left;'>" +
               "<a href='/user/"+ data[i].screen_name +"'><img width='48px' height='48px' src='"+ data[i].profile_image_url + "'></a></div>" +
             "<div style= 'float:left; margin-left:1em;'>" +
-            "<a href='/user/"+ data[i].screen_name +"'>" + "<strong class='screen_name'>@" + data[i].screen_name + "</a><a style='margin-left:3px;' target='blank' href='http://twitter.com/"+data[i].screen_name+"'><img src='logo.png' width='18px' height='18px' style='margin-bottom:-3px;'></a></strong><br/>" +
+            "<a href='/user/"+ data[i].screen_name +"'>" + "<strong class='screen_name'>@" + data[i].screen_name + "</a><a style='margin-left:3px;' target='blank' href='http://twitter.com/"+data[i].screen_name+"'><img src='/assets/logo.png' width='18px' height='18px' style='margin-bottom:-3px;'></a></strong><br/>" +
               "<strong>" + data[i].name + "</strong></div>" +
             "<div align='right'>" +
               "<span class='label'>Following</span> <a target='_blank' href='https://twitter.com/"+ data[i].screen_name + "/following'><strong>"+ data[i].friends_count + "</strong></a>" +
