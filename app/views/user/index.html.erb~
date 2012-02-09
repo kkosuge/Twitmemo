@@ -58,19 +58,17 @@
 
               
                 <% if current_user -%>
-                  <div style="float:right;margin-top:-25px">
+                  <div class="fav" style="float:right;margin-top:-25px" data-id="<%= memo.id %>">
                     <% favs = memo.favs
                        faved_users = favs.each.map{|fav| fav.fav_screen_name} %>
                     <% faved_users.each do |name| -%>
                       <img src="http://img.tweetimag.es/i/<%= name %>" width="20px" height="20px">
                     <% end %>
-                    <span class="fav" data-id="<%= memo.id %>">
                     <% if faved_users.include?(session[:screen_name]) -%>
-                        <%= image_tag "fav.png",width:"20px",height:"20px",class:"fav_img"; %>
+                      <%= image_tag "fav.png",width:"20px",height:"20px",class:"fav_img"; %>
                     <% else -%>
-                        <%= image_tag "unfav.png",width:"20px",height:"20px",class:"fav_img"; %>
+                      <%= image_tag "unfav.png",width:"20px",height:"20px",class:"fav_img"; %>
                     <% end %>
-                    </span>
                   </div>
                 <% end %>
 
