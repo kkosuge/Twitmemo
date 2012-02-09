@@ -29,7 +29,6 @@
             </div>
 
             <div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>
-              <p><%= memo.favs[2] %></p>
               <h4 id="screen_name"><%= link_to memo.name, user_path(screen_name: memo.name) %><a target="blank" href="http://twitter.com/<%= memo.name %>"><img src="logo.png" width="18px" height="18px" style="margin-left:1px;margin-bottom:-3px;"></a></h4>
               <p style="margin-right:90px;margin-top:5px;word-break:break-all;"><%=hbr memo.note %></p>
             </div>    
@@ -41,9 +40,9 @@
 
             <div class="fav" style="float:right;margin-top:-25px" data-id="<%= memo.id %>">
               <% if memo.fav_flag == 1 -%>
-                <%= image_tag "fav.png",width:"20px",height:"20px"; %>
+                <%= image_tag "fav.png",width:"20px",height:"20px", class:"fav_img"; %>
               <% else -%>
-                <%= image_tag "unfav.png",width:"20px",height:"20px"; %>
+                <%= image_tag "unfav.png",width:"20px",height:"20px", class:"fav_img" %>
               <% end %>
             </div>
 

@@ -56,7 +56,7 @@ $(document).ready(function(){
   /* fav */
   $(".fav").click(function(){ 
     var memo_id = $(this).attr("data-id");
-    var parents = $(this).children();
+    var parents = $(this).children(".fav_img");
       $.ajax({
         type: "POST", 
         url: "/api/fav.json",

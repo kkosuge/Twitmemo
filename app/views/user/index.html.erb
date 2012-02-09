@@ -57,10 +57,15 @@
                 </div> 
 
                 <div class="fav" style="float:right;margin-top:-25px" data-id="<%= memo.id %>">
-                  <% if memo.fav_flag == 1 -%>
-                    <%= image_tag "fav.png",width:"20px",height:"20px"; %>
+                  <% favs = memo.favs
+                     faved_users = favs.each.map{|fav| fav.fav_screen_name} %>
+                  <% faved_users.each do |name| -%>
+                  <img src="http://img.tweetimag.es/i/<%= name %>" width="20px" height="20px">
+                  <% end %>
+                  <% if faved_users.include?(session[:screen_name]) -%>
+                    <%= image_tag "fav.png",width:"20px",height:"20px",class:"fav_img"; %>
                   <% else -%>
-                    <%= image_tag "unfav.png",width:"20px",height:"20px"; %>
+                    <%= image_tag "unfav.png",width:"20px",height:"20px",class:"fav_img"; %>
                   <% end %>
                 </div>
 

@@ -4,9 +4,6 @@ class FavController < ApplicationController
     @fav = Fav.where(memo_id: params[:memo_id],fav_user_id:session[:user_id]).first
     @memo = Memo.find(params[:memo_id])
 
-    pp "*"*1000
-    pp @memo
-    
     if @fav 
       @fav.destroy
       @memo.fav_flag = 0
