@@ -31,7 +31,10 @@ class MemosController < ApplicationController
 
   # POST /api/post.json
   def create
-    return redirect_to '/404.html' unless request.xhr?
+    if request.referer
+      return redirect_to '/404.html' unless request.xhr?
+    end
+
     @twitter = TwitterUser.find_by_screen_name(params[:name]) || create_twitter_user(screen_name: params[:name])
     @memo = Memo.where(twitter_user_id: @twitter.id, author: session[:twitter_id]).first
     
@@ -48,12 +51,19 @@ class MemosController < ApplicationController
 
     respond_to do |format|
       if @memo.save
-        format.html { redirect_to @memo, notice: 'Memo was successfully created.' }
         format.json { render json: @memo, status: :created, location: @memo}
       else
-        format.html { render action: "new" }
         format.json { render json: @memo.errors, status: :unprocessable_entity}
       end
+    end
+  end
+
+  # POST /api/check.json
+  def check
+    if @current_user
+      render json: {status: 1, token: session[:_csrf_token]}
+    else
+      render json: {status: 0}
     end
   end
 

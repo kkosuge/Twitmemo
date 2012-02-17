@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  protect_from_forgery
+  protect_from_forgery :except => ["create"]
   before_filter :set_return_to
 
   def need_oauth

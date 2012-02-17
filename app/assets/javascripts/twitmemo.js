@@ -114,7 +114,7 @@ $(document).ready(function(){
             "<div style='float:left;'>" +
               "<a href='/user/"+ name +"'><img height='48px' width='48px' src='"+ json.profile_image_url + "'></a></div>" +
             "<div style='width:390px; float:left; margin-left:1em; margin-top:-5px;'>" +
-              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+ name +"</a><a href='http://twitter.com/"+name+"'><img src='logo.png' width='18px' height='18px' style='margin-left:1px;margin-bottom:-3px;'></a></h4>" +
+              "<h4 id='screen_name'><a href='/user/"+ name +"'>"+ name +"</a><a href='http://twitter.com/"+name+"'><img src='/assets/logo.png' width='18px' height='18px' style='margin-left:1px;margin-bottom:-3px;'></a></h4>" +
               "<p style='margin-right:90px;margin-top:5px;word-break:break-all;'>"+ note +"</p></div>" +    
             "<div style='float:right;margin-top:-40px'>" +
               "<span class='editmemo editarea' data-flag='" + flag + "' data-note='" + note + "' data-name='" + name + "' data-img='" + json.profile_image_url + "' style='visibility:hidden;'><i class='icon-edit'></i><a href='#'>Edit</a></span>" +
