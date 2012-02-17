@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('#element').popover('toggle');
   editmemoclick();
 
   /* stickyscroll */
