@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
   def twitter_client
     user = User.find(session[:user_id]) if session[:user_id]
     Twitter.configure do |config|
-      config.consumer_key = 'yUErzm2W0S0mWPGva04gw'
-      config.consumer_secret = 'KyNVtEXmg7RsofNcmla5Hw6lpvxcAQe15jEF4TZE'
+      config.consumer_key = Twitmemo::Application.config.consumer_key
+      config.consumer_secret = Twitmemo::Application.config.consumer_secret
       config.oauth_token = user.token
       config.oauth_token_secret = user.secret
     end

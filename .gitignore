@@ -14,3 +14,6 @@ spec/tmp/*
 **.orig
 rerun.txt
 pickle-email-*.html
+*.swp
+*.swo
+*~
